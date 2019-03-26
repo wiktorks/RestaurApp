@@ -1,0 +1,15 @@
+div {
+  border: 1px solid red;
+  display: inline-block;
+  padding: 20px;
+}
+
+div form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+div form input {
+  margin: 5px 0;
+}
