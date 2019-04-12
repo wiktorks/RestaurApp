@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/restaurants/restaurants.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+    <title>Document</title>
+</head>
+
+<body>
+<nav id="top-nav">
+    <ul>
+        <li>
+            <div id="nav-button" class="icon"><i class="fas fa-bars"></i></div>
+            <form id="search-restaurants" action="">
+                <input type="text">
+                <input type="submit">
+            </form>
+        </li>
+        <li>
+            <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="icon"><i class="fas fa-sign-in-alt"></i></div>
+        </li>
+    </ul>
+</nav>
+<section id="main-content">
+    <nav class="side-nav">
+        <div class="food-styles">
+            <div class="container-head">
+                <h3>Kuchnia</h3>
+            </div>
+            <ul>
+                <li>k1</li>
+                <li>k2</li>
+                <li>k3</li>
+                <li>k3</li>
+                <li>k3</li>
+            </ul>
+        </div>
+        <div class="star-rating">
+            <div class="icon"><i class="fas fa-star"></i></div>
+            <div class="icon"><i class="fas fa-star"></i></div>
+            <div class="icon"><i class="fas fa-star"></i></div>
+            <div class="icon"><i class="fas fa-star"></i></div>
+            <div class="icon"><i class="fas fa-star"></i></div>
+        </div>
+
+    </nav>
+    <article class="restaurant-list">
+
+        <% if(dane.length > 0) { %>
+            <table class="restaurants">
+                <tr class="head">
+                    <th></th>
+                    <th>Nazwa</th>
+                    <th>Cena</th>
+                    <th>Ocena</th>
+                </tr>
+                <% for(item of dane) { %>
+                    <tr>
+                        <td>
+                            <div class="img">
+
+                            </div>
+                        </td>
+                        <td>
+                            <p class="restaurant-name"><%= item.Nazwa %></p>
+                        </td>
+                        <td>
+                            <div class="price">
+                                <span><i class="fas fa-money-bill-wave"></i></span>
+                                <p>Średnia</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="ratings">
+                                <div class="empty-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="full-stars" style="width: <%= (item.Srednia_Ocen/5)*100 %>%">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                <% } %>
+            </table>
+        <% } else { %>
+            <h1>Nie znaleziono danej restauracji!</h1>
+        <% } %>
+
+    </article>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/javascripts/restaurants/main.js"></script>
+</body>
+
+</html>

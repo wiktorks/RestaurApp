@@ -1,0 +1,241 @@
+body {
+    margin: 0;
+    font-family: "Lato", sans-serif;
+}
+
+header {
+    height: 90vh;
+    background-image: url("/images/restauracja-start-2.jpeg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header h1,
+header h2,
+header p {
+    font-size: 4em;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 25px;
+}
+header h1 {
+    margin-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+header h2 {
+    margin-top: 0;
+    font-size: 3em;
+}
+
+header p {
+    margin-top: 50px;
+    font-size: 1.5em;
+    border-radius: 15px;
+}
+
+header h1 span {
+    color: red;
+    font-style: italic;
+    font-size: 1.5em;
+}
+
+header form {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header form input {
+    border: 0;
+    /* height nadpisuje align-self!!! */
+    padding: 15px;
+    font-size: 1.5em;
+    flex-basis: 74%;
+    border-radius: 5px;
+    align-self: stretch;
+}
+
+header form input[type="submit"] {
+    padding: 0;
+    color: #fff;
+    background-color: #d9534f;
+    flex-basis: 20%;
+}
+
+nav {
+    background-color: #d9534f;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 10vh;
+    position: sticky;
+    top: 0;
+}
+nav ul {
+    padding: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    list-style-type: none;
+    font-size: 1.5em;
+}
+nav ul li {
+    text-align: center;
+    flex-basis: 12%;
+    padding: 15px 0;
+    transition: all 0.4s;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+nav ul li:hover {
+    background-color: rgb(185, 0, 0);
+    color: #000;
+}
+
+a.anchor {
+    display: block;
+    position: relative;
+    top: -10vh;
+    visibility: hidden;
+}
+
+#log-register {
+    background-color: #1ac6ff;
+    position: relative;
+    height: 90vh;
+    overflow: hidden;
+}
+
+#log-register .log-buttons {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    color: #fff;
+}
+
+#log-register .log-buttons .line {
+    margin: 10px;
+    align-self: stretch;
+    border: 2px solid #000;
+    border-radius: 2px;
+}
+
+#log-register .log-buttons .button {
+    font-size: 1.5em;
+    width: 100%;
+    text-align: center;
+}
+
+#log-register .log-buttons .btn-log {
+    padding: 0 100px 0 250px;
+}
+
+#log-register .log-buttons .btn-reg {
+    padding: 0 250px 0 100px;
+}
+
+#log-register .log-buttons .button h2 {
+    position: relative;
+    transition: color 0.4s;
+    display: inline-block;
+}
+
+#log-register .log-buttons .button h2::after {
+    content: "";
+    border-bottom: 4px solid #fff;
+    height: 0;
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    transition: width 0.4s;
+}
+
+#log-register .log-buttons .button h2.selected::after{
+    width: 120%;
+}
+
+#log-register .log-buttons .button h2:hover {
+    color: #000;
+}
+
+#log-register .log-register-forms {
+    padding: 5px;
+    position: absolute;
+
+    height: 500px;
+    display: flex;
+    align-items: center;
+    margin-left: 0%;
+}
+
+#log-register .container {
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    top: 50%;
+    left: 50%;
+    transform: translate(-100%, -50%);
+}
+
+#log-register form {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.702);
+    padding: 30px;
+    width: 500px;
+    flex-wrap: wrap;
+    align-items: center;
+    border-radius: 20px;
+    margin: auto;
+}
+
+#log-register form input {
+    flex-basis: 100%;
+    padding: 10px;
+    font-size: 1.2em;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    min-width: 0;
+}
+
+#log-register .login {
+    width: 400px;
+}
+
+#log-register .login input {
+    font-size: 1.5em;
+    margin: 15px;
+    padding: 15px;
+
+}
+
+#log-register form input[name="name"],
+#log-register form input[name="surname"] {
+    flex-basis: 42%;
+}
+
+#log-register form input[type="submit"] {
+    flex-basis: 35%;
+    color: #fff;
+    background-color: #d9534f;
+    margin-top: 20px;
+}
