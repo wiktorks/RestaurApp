@@ -14,7 +14,7 @@ router.post('/', function (req, res) {
 });
 
 router.get('/restaurants', function (req, res) {
-    var sql = 'SELECT Nazwa, Srednia_Ocen FROM restauracja WHERE Adres LIKE "%' + req.query.str + '%"';
+    var sql = 'SELECT Id_Restaruacja, Nazwa, Srednia_Ocen FROM restauracja WHERE Adres LIKE "%' + req.query.str + '%"';
     db.query(sql, function (err, data) {
         if (err) throw err;
         res.render('restaurants', {dane: data});
@@ -24,13 +24,20 @@ router.get('/restaurants', function (req, res) {
 
 router.post('/restaurants', function(req, res) {
     let data = req.body.answer;
-    var sql = 'SELECT Nazwa, Srednia_Ocen FROM restauracja WHERE Adres LIKE "%' + data + '%"';
+    var sql = 'SELECT Id_Restaruacja, Nazwa, Srednia_Ocen FROM restauracja WHERE Adres LIKE "%' + data + '%"';
     console.log(sql);
     db.query(sql, function (err, data) {
         if (err) throw err;
+        for(item of data) {
+            console.log(item.Id_Restaruacja);
+        }
         res.send({dane: data});
     });
     //res.send({answer: 'doszło'});
+});
+
+router.get('/restaurants/:restId', function(req, res) {
+    res.render('restaurant-details');
 });
 
 module.exports = router;

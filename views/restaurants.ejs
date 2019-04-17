@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+                                 integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="/stylesheets/restaurants/restaurants.css">
 
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
@@ -65,22 +65,22 @@
                     <th>Ocena</th>
                 </tr>
                 <% for(item of dane) { %>
-                    <tr>
-                        <td>
+                    <tr id="<%= item.Id_Restaruacja %>">
+                        <td class="rest-image">
                             <div class="img">
 
                             </div>
                         </td>
-                        <td>
+                        <td class="rest-name">
                             <p class="restaurant-name"><%= item.Nazwa %></p>
                         </td>
-                        <td>
+                        <td class="price-tag">
                             <div class="price">
                                 <span><i class="fas fa-money-bill-wave"></i></span>
                                 <p>Średnia</p>
                             </div>
                         </td>
-                        <td>
+                        <td class="rest-rating">
                             <div class="ratings">
                                 <div class="empty-stars">
                                     <i class="fas fa-star"></i>

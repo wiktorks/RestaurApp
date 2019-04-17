@@ -1,0 +1,27 @@
+@mixin font-icon($size, $bgcolor, $fontcolor) {
+  display:inline-block;
+  font-size: $size;
+  line-height: $size + 10px;
+  color:$fontcolor;
+  width: $size + 10px;
+  height: $size + 10px;
+  text-align: center;
+  vertical-align: bottom;
+  border-radius: 50%;
+  transition: background-color 0.4s;
+  &:hover {
+    background-color:$bgcolor;
+  }
+}
+
+@mixin button($width, $height, $color) {
+  width: $width;
+  height: $height;
+  background-color: $color;
+  color: #fff;
+  border: none;
+  transition: background-color, 0.4s;
+  &:hover {
+    background-color: darken($color, 20%);
+  }
+}
