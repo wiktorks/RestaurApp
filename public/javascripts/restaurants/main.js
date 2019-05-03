@@ -4,23 +4,26 @@ $(function () {
     $('tr:not(.head)').click((e) => {
         // let restName = e.currentTarget.getElementsByClassName('restaurant-name')[0].innerText;
         // console.log(restName.split(' ').join('-').toLowerCase());
-        window.location.href = '/restaurants/' + e.currentTarget.id;
+        window.location.href += e.currentTarget.id;
         // console.dir(e.currentTarget.id);
-    })
+    });
 
     function submitter(e) {
         e.preventDefault();
-        postData(`/restaurants`, {answer: e.target[0].value})
+        window.location.href = '/restaurants/' + e.target[0].value;
+        /*postData(`/restaurants`, {answer: e.target[0].value})
             .then(data => addRestaurants(data))
-            .catch(error => console.error(error));
+            .catch(error => console.error(error));*/
     }
 
     function addRestaurants(restaurants) {
         $('.restaurants tr').not('tr.head').remove();
-        restaurants.dane.forEach(item => {
-            console.log(item);
-            let row = document.createElement(`tr id="${item.Id_Restaruacja}"`);
-            $(row).html(`<td class="rest-image">
+        if(restaurants.dane.length > 0) {
+            restaurants.dane.forEach(item => {
+                console.log(item);
+                let row = document.createElement(`tr`);
+                row.setAttribute('id', `${item.Id_Restaruacja}`);
+                $(row).html(`<td class="rest-image">
                             <div class="img"></div>
                         </td>
                         <td class="rest-name">
@@ -50,8 +53,11 @@ $(function () {
                                 </div>
                             </div>
                         </td>`);
-            $('.restaurants tbody').append($(row));
-        });
+                $('.restaurants tbody').append($(row));
+            });
+        } else {
+            $('#restaurant-list').html(`<h1>Nie znaleziono restauracji.</h1>`);
+        }
     }
 
     function getPercent(num) {

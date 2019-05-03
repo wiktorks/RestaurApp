@@ -1,6 +1,12 @@
 $(function () {
     // const formContainer = $('.log-register-forms');
 
+    $('form.search').submit(function(e) {
+        e.preventDefault();
+        console.log('/restaurants/' + e.target[0].value);
+        window.location.href = '/restaurants/' + e.target[0].value;
+    });
+
     $('.log-register-forms').css('width', '200%');
 
     $('.container').each((idx, el) => {

@@ -13,17 +13,26 @@ router.post('/', function (req, res) {
     res.redirect(link);
 });
 
-router.get('/restaurants', function (req, res) {
-    var sql = 'SELECT Id_Restaruacja, Nazwa, Srednia_Ocen FROM restauracja WHERE Adres LIKE "%' + req.query.str + '%"';
-    db.query(sql, function (err, data) {
-        if (err) throw err;
-        res.render('restaurants', {dane: data});
-    });
-    // res.render('restaurants');
+router.get('/restaurants/:search', function (req, res, next) {
+    var sql = 'SELECT Id_Restaruacja, Nazwa, Srednia_Ocen, Srednia_Cen FROM restauracja WHERE Adres LIKE "%' + req.params.search + '%"';
+    if(Object.entries(req.query).length === 0 && req.query.constructor === Object) { // Czy nie ma parametrów filtrowania
+        db.query(sql, function (err, restaurants) {
+            if (err) throw err;
+            db.query('SELECT Nazwa FROM kuchnia', function (err, kitchen) {
+                if (err) throw err;
+                res.render('restaurants', {restaurants: restaurants, kitchen: kitchen});
+            });
+        });
+    } else {
+        next();
+    }
+}, function (req, res) {
+    console.log(req.query.id + ', ' + req.params.search);
 });
 
-router.post('/restaurants', function(req, res) {
-    let data = req.body.answer;
+router.post('/restaurants/:search', function(req, res) {
+
+    /*let data = req.body.answer;
     var sql = 'SELECT Id_Restaruacja, Nazwa, Srednia_Ocen FROM restauracja WHERE Adres LIKE "%' + data + '%"';
     console.log(sql);
     db.query(sql, function (err, data) {
@@ -32,12 +41,14 @@ router.post('/restaurants', function(req, res) {
             console.log(item.Id_Restaruacja);
         }
         res.send({dane: data});
-    });
+    });*/
     //res.send({answer: 'doszło'});
 });
 
+/*
 router.get('/restaurants/:restId', function(req, res) {
     res.render('restaurant-details');
 });
+*/
 
 module.exports = router;
