@@ -2,7 +2,8 @@
 body {
   margin: 0;
   background-color: #F8F5F2;
-  font-family: "Lato", sans-serif; }
+  font-family: "Lato", sans-serif;
+  pointer-events: auto; }
 
 #top-nav {
   position: fixed;
@@ -28,9 +29,10 @@ body {
         text-align: center;
         vertical-align: bottom;
         border-radius: 50%;
-        transition: background-color 0.4s; }
-        #top-nav ul li .icon:hover {
-          background-color: rgba(0, 0, 0, 0.3); }
+        /*transition: background-color 0.4s;
+  &:hover {
+    background-color:$bgcolor;
+  }*/ }
       #top-nav ul li form {
         margin-left: 100px;
         display: flex;
@@ -58,11 +60,11 @@ body {
           margin-right: 0; }
 
 #main-content {
-  width: 100%;
-  margin-top: 72px; }
+  margin-top: 72px;
+  height: 100%; }
   #main-content .side-nav {
     width: 25%;
-    height: 100%;
+    height: calc(100% - 172px);
     overflow: auto;
     display: flex;
     flex-direction: column;
@@ -73,41 +75,83 @@ body {
     left: 0;
     padding-top: 100px;
     margin-left: 0; }
-    #main-content .side-nav .food-styles {
-      width: 60%; }
-      #main-content .side-nav .food-styles .container-head {
+    #main-content .side-nav .nav-container {
+      width: 60%;
+      margin-bottom: 50px; }
+      #main-content .side-nav .nav-container .container-head {
         color: white;
         font-size: 1.5em;
         background-color: #d9534f;
         border-radius: 10px;
         padding: 5px 10px;
         box-sizing: border-box; }
-        #main-content .side-nav .food-styles .container-head h3 {
+        #main-content .side-nav .nav-container .container-head h3 {
           margin: 0; }
-      #main-content .side-nav .food-styles ul {
+      #main-content .side-nav .nav-container .container-body {
         list-style-type: none;
         padding: 0;
         text-align: center;
         margin: 0; }
-        #main-content .side-nav .food-styles ul li {
+        #main-content .side-nav .nav-container .container-body .container-elem {
+          width: 90%;
           padding: 5px;
           border-radius: 10px;
           border-bottom: none;
           background-color: #fff;
-          margin: 5px 0; }
+          margin: 5px auto; }
+      #main-content .side-nav .nav-container.kitchen .container-elem {
+        transition: all .2s;
+        color: blue;
+        cursor: pointer; }
+        #main-content .side-nav .nav-container.kitchen .container-elem:hover:not(.selected) {
+          background-color: #a0a09f; }
+        #main-content .side-nav .nav-container.kitchen .container-elem.selected {
+          background-color: #d97376;
+          color: #fff; }
     #main-content .side-nav .star-rating .icon {
       display: inline-block;
-      font-size: 30px;
-      line-height: 40px;
-      color: #ffd900;
-      width: 40px;
-      height: 40px;
+      font-size: 25px;
+      line-height: 35px;
+      color: #8b8a8a;
+      width: 35px;
+      height: 35px;
       text-align: center;
       vertical-align: bottom;
       border-radius: 50%;
-      transition: background-color 0.4s; }
-      #main-content .side-nav .star-rating .icon:hover {
-        background-color: #8b8a8a; }
+      /*transition: background-color 0.4s;
+  &:hover {
+    background-color:$bgcolor;
+  }*/ }
+    #main-content .side-nav .price-tags .icon {
+      margin: 10px 13px;
+      display: inline-block;
+      text-align: center;
+      color: #8b8a8a;
+      cursor: pointer; }
+      #main-content .side-nav .price-tags .icon span {
+        font-size: 2em; }
+      #main-content .side-nav .price-tags .icon p {
+        margin: 0; }
+      #main-content .side-nav .price-tags .icon p {
+        font-size: 0.9em;
+        color: #8b8a8a; }
+    #main-content .side-nav .price-tags li {
+      /*.cheap:hover {
+          color: $goldColor;
+        }
+
+        .average:hover {
+          color: darkgreen;
+        }
+
+        .expensive:hover {
+          color: brown;
+        }*/ }
+      #main-content .side-nav .price-tags li:hover {
+        color: #494949; }
+    #main-content .side-nav .empty-stars i, #main-content .side-nav .full-stars i {
+      padding: 0 2px;
+      cursor: pointer; }
   #main-content .restaurant-list {
     margin-left: 25%;
     padding: 50px; }
@@ -141,28 +185,29 @@ body {
           font-weight: bold; }
         #main-content .restaurant-list .restaurants tr td .price {
           display: inline-block;
-          text-align: center; }
+          text-align: center;
+          color: #8b8a8a; }
           #main-content .restaurant-list .restaurants tr td .price span {
-            font-size: 3em;
-            color: #8b8a8a; }
+            font-size: 3em; }
           #main-content .restaurant-list .restaurants tr td .price p {
             margin: 0; }
-        #main-content .restaurant-list .restaurants tr td .ratings {
-          position: relative;
-          vertical-align: middle;
-          display: inline-block;
-          overflow: hidden;
-          font-size: 1.7em; }
-          #main-content .restaurant-list .restaurants tr td .ratings .full-stars {
-            position: absolute;
-            left: 0;
-            top: 0;
-            white-space: nowrap;
-            overflow: hidden;
-            color: #ffd900;
-            width: 68%;
-            /* Parametr do zmiany w zależności od ocen */ }
-          #main-content .restaurant-list .restaurants tr td .ratings .empty-stars {
-            color: #8b8a8a; }
+
+.ratings {
+  position: relative;
+  vertical-align: middle;
+  display: inline-block;
+  overflow: hidden;
+  font-size: 1.7em; }
+  .ratings .full-stars {
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #ffd900;
+    width: 0;
+    /* Parametr 'width' do zmiany w zależności od ocen */ }
+  .ratings .empty-stars {
+    color: #8b8a8a; }
 
 /*# sourceMappingURL=restaurants.css.map */

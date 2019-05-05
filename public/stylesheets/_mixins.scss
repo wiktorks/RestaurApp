@@ -8,10 +8,10 @@
   text-align: center;
   vertical-align: bottom;
   border-radius: 50%;
-  transition: background-color 0.4s;
+  /*transition: background-color 0.4s;
   &:hover {
     background-color:$bgcolor;
-  }
+  }*/
 }
 
 @mixin button($width, $height, $color) {
@@ -23,5 +23,16 @@
   transition: background-color, 0.4s;
   &:hover {
     background-color: darken($color, 20%);
+  }
+}
+
+@mixin font-with-subtitle($fontSize) {
+  display: inline-block;
+  text-align: center;
+  span {
+    font-size: $fontSize;
+  }
+  p {
+    margin: 0;
   }
 }

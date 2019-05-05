@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 
 <head>
     <meta charset="UTF-8">
@@ -33,22 +33,61 @@
 </nav>
 <section id="main-content">
     <nav class="side-nav">
-        <div class="food-styles">
+        <div class="nav-container kitchen">
             <div class="container-head">
                 <h3>Kuchnia</h3>
             </div>
-            <ul>
+            <ul class="container-body">
                 <% for(item of kitchen) { %>
-                    <li><%= item.Nazwa %></li>
+                    <li class="container-elem"><%= item.Nazwa %></li>
                 <% } %>
             </ul>
         </div>
-        <div class="star-rating">
-            <div class="icon"><i class="fas fa-star"></i></div>
-            <div class="icon"><i class="fas fa-star"></i></div>
-            <div class="icon"><i class="fas fa-star"></i></div>
-            <div class="icon"><i class="fas fa-star"></i></div>
-            <div class="icon"><i class="fas fa-star"></i></div>
+        <div class="nav-container rating">
+            <div class="container-head">
+                <h3>Ocena</h3>
+            </div>
+            <div class="container-body">
+                <div class="container-elem">
+                    <div class="ratings">
+                        <div class="empty-stars">
+                            <i class="fas fa-star"></i
+                            ><i class="fas fa-star"></i
+                            ><i class="fas fa-star"></i
+                            ><i class="fas fa-star"></i
+                            ><i class="fas fa-star"></i>
+                        </div>
+                        <style></style>
+                        <div class="full-stars">
+                            <i class="fas fa-star"></i
+                            ><i class="fas fa-star"></i
+                            ><i class="fas fa-star"></i
+                            ><i class="fas fa-star"></i
+                            ><i class="fas fa-star"></i>
+                        </div>
+                        <div class="full-stars onhover">
+                            <i class="fas fa-star"></i
+                            ><i class="fas fa-star"></i
+                            ><i class="fas fa-star"></i
+                            ><i class="fas fa-star"></i
+                            ><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="nav-container price-tags">
+            <div class="container-head">
+                <h3>Średni koszt</h3>
+            </div>
+            <ul class="container-body">
+                <li class="icon cheap"><span><i class="fas fa-coins"></i></span>
+                    <p>Tania</p></li>
+                <li class="icon average"><span><i class="fas fa-money-bill-wave"></i></span>
+                    <p>Średnia</p></li>
+                <li class="icon expensive"><span><i class="fas fa-wallet"></i></span>
+                    <p>Droga</p></li>
+            </ul>
         </div>
 
     </nav>
@@ -122,7 +161,7 @@
     </article>
 </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="/javascripts/restaurants/main.js"></script>
+<script type="module" src="/javascripts/restaurants/main.js"></script>
 </body>
 
 </html>

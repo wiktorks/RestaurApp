@@ -1,4 +1,5 @@
 var express = require('express');
+var mysql = require('mysql');
 var router = express.Router();
 
 const db = require('../lib/dbconfig/dbconnection');
@@ -14,9 +15,9 @@ router.post('/', function (req, res) {
 });
 
 router.get('/restaurants/:search', function (req, res, next) {
-    var sql = 'SELECT Id_Restaruacja, Nazwa, Srednia_Ocen, Srednia_Cen FROM restauracja WHERE Adres LIKE "%' + req.params.search + '%"';
+    let sql = 'SELECT Id_Restaruacja, Nazwa, Srednia_Ocen, Srednia_Cen FROM restauracja WHERE Adres LIKE ?';
     if(Object.entries(req.query).length === 0 && req.query.constructor === Object) { // Czy nie ma parametrów filtrowania
-        db.query(sql, function (err, restaurants) {
+        db.query(sql, [ `%${req.params.search}%`], function (err, restaurants) {
             if (err) throw err;
             db.query('SELECT Nazwa FROM kuchnia', function (err, kitchen) {
                 if (err) throw err;
@@ -27,7 +28,12 @@ router.get('/restaurants/:search', function (req, res, next) {
         next();
     }
 }, function (req, res) {
-    console.log(req.query.id + ', ' + req.params.search);
+    console.log(req.query.kitchen);
+    let sql = 'SELECT Id_Restaruacja, Nazwa, Srednia_Ocen, Srednia_Cen FROM restauracja WHERE Adres LIKE ? AND fk_kuchnia = (SELECT Id_kuchnia FROM kuchnia WHERE Nazwa LIKE ?)';
+    db.query(sql, [`%${req.params.search}%`, req.query.kitchen], function(err, restaurants) {
+        if (err) throw err;
+        res.send({dane: restaurants});
+    });
 });
 
 router.post('/restaurants/:search', function(req, res) {
