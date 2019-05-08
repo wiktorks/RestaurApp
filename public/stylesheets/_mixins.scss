@@ -8,10 +8,10 @@
   text-align: center;
   vertical-align: bottom;
   border-radius: 50%;
-  /*transition: background-color 0.4s;
+  transition: background-color 0.4s;
   &:hover {
     background-color:$bgcolor;
-  }*/
+  }
 }
 
 @mixin button($width, $height, $color) {

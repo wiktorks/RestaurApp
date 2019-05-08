@@ -14,7 +14,7 @@ router.post('/', function (req, res) {
     res.redirect(link);
 });
 
-router.get('/restaurants/:search', function (req, res, next) {
+router.get('/restaurants/:search', function (req, res) {
     let sql = 'SELECT Id_Restaruacja, Nazwa, Srednia_Ocen, Srednia_Cen FROM restauracja WHERE Adres LIKE ?';
     if(Object.entries(req.query).length === 0 && req.query.constructor === Object) { // Czy nie ma parametrów filtrowania
         db.query(sql, [ `%${req.params.search}%`], function (err, restaurants) {
@@ -25,15 +25,27 @@ router.get('/restaurants/:search', function (req, res, next) {
             });
         });
     } else {
-        next();
+        let queryData = [`%${req.params.search}%`];
+        if(req.query.reset !== 'true') {
+            if(req.query.kitchen) {
+                sql +=  ' AND fk_kuchnia = (SELECT Id_kuchnia FROM kuchnia WHERE Nazwa LIKE ?)';
+                queryData.push(req.query.kitchen);
+            }
+            if(req.query.rating) {
+                sql += ' AND Srednia_Ocen >= ?';
+                queryData.push(req.query.rating);
+            }
+            if(req.query.pricetag) {
+                sql += ' AND Srednia_Cen IN (?)';
+                queryData.push(req.query.pricetag.split('-'));
+            }
+            console.log(sql + ' -> ' + queryData);
+        }
+        db.query(sql, queryData, function(err, restaurants) {
+            if (err) throw err;
+            res.send({dane: restaurants});
+        });
     }
-}, function (req, res) {
-    console.log(req.query.kitchen);
-    let sql = 'SELECT Id_Restaruacja, Nazwa, Srednia_Ocen, Srednia_Cen FROM restauracja WHERE Adres LIKE ? AND fk_kuchnia = (SELECT Id_kuchnia FROM kuchnia WHERE Nazwa LIKE ?)';
-    db.query(sql, [`%${req.params.search}%`, req.query.kitchen], function(err, restaurants) {
-        if (err) throw err;
-        res.send({dane: restaurants});
-    });
 });
 
 router.post('/restaurants/:search', function(req, res) {

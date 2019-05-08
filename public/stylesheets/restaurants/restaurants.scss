@@ -84,6 +84,13 @@ body {
     padding-top: 100px;
     margin-left: 0;
 
+    .reset {
+      @include button(150px, 50px, $redColor);
+      font-size: 1.2em;
+      padding: 10px 0 32px;
+      margin-bottom: 50px;
+      border-radius: 10px;
+    }
     .nav-container {
       width: 60%;
       margin-bottom: 50px;
@@ -134,11 +141,11 @@ body {
       }
     }
 
-    .star-rating {
+    /*.star-rating {
       .icon {
         @include font-icon(25px, #8b8a8a, #8b8a8a);
       }
-    }
+    }*/
 
     .price-tags {
 
@@ -160,17 +167,17 @@ body {
           color: #494949;
         }
 
-        /*.cheap:hover {
+        &.cheap.selected {
           color: $goldColor;
         }
 
-        .average:hover {
+        &.average.selected {
           color: darkgreen;
         }
 
-        .expensive:hover {
+        &.expensive.selected {
           color: brown;
-        }*/
+        }
       }
     }
     .empty-stars i, .full-stars i {
@@ -253,6 +260,9 @@ body {
     overflow: hidden;
     color: $goldColor;
     width: 0;/* Parametr 'width' do zmiany w zależności od ocen */
+    &.onhover {
+      color: rgba(255, 217, 0, 0.8);
+    }
   }
 
   .empty-stars {

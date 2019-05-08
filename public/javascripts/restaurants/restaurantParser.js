@@ -14,8 +14,7 @@ export default function addRestaurants(restaurants) {
                         </td>
                         <td class="price-tag">
                             <div class="price">
-                                <span><i class="fas fa-money-bill-wave"></i></span>
-                                <p>Średnia</p>
+                                ${getPriceTag(item.Srednia_Cen)}
                             </div>
                         </td>
                         <td class="rest-rating">
@@ -48,4 +47,23 @@ export default function addRestaurants(restaurants) {
 
 function getPercent(num) {
     return (num / 5) * 100;
+}
+
+function getPriceTag(price) {
+    if(price == 'cheap') {
+         return `<span>
+        <i class="fas fa-coins"></i>
+            </span>
+            <p>Tania</p>`;
+    } else if(price == 'average'){
+        return `<span>
+        <i class="fas fa-money-bill-wave"></i>
+            </span>
+            <p>Średnia</p>`;
+    } else {
+        return `<span>
+        <i class="fas fa-wallet"></i>
+            </span>
+            <p>Droga</p>`;
+    }
 }

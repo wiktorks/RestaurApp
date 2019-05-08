@@ -8,10 +8,11 @@ const getWidth = (e) => {
         counter++;
         e.target = e.target.previousElementSibling;
     }
-    return '' + (counter * 20) + '%';
+    return counter;
 }
 
 $(function () {
+    $('.side-nav .reset').hide();
     $('#search-restaurants').submit(e => {
         e.preventDefault();
         window.location.href = '/restaurants/' + e.target[0].value;
@@ -36,28 +37,73 @@ $(function () {
     });
 
     $('.side-nav .ratings i').mouseover((e) => {
-        $('.side-nav .ratings .full-stars.onhover').css('width', getWidth(e));
+        $('.side-nav .ratings .full-stars.onhover').css('width', (20 * getWidth(e)) + '%');
     }).mouseleave(() => {
         $('.side-nav .ratings .full-stars.onhover').css('width', '0%');
     }).click((e) => {
-        $('.side-nav .ratings .full-stars').css('width', getWidth(e));
+        let stars = $('.side-nav .ratings .full-stars:not(.onhover)');
+        let index = getWidth(e);
+        let width = '' + (index * 20) + '%';
+
+        stars.css('width', width);
+        stars.children().removeClass('selected');
+        stars.children().eq(index-1).addClass('selected');
+        $('.side-nav .reset').show();
+        filter();
     });
 
-    $('.price-tags li').click();
+    $('.price-tags li').click((e) => {
+        $(e.currentTarget).toggleClass('selected');
+        $('.side-nav .reset').show();
+        filter();
+    });
 
     $('tr:not(.head)').click((e) => {
-        // let restName = e.currentTarget.getElementsByClassName('restaurant-name')[0].innerText;
-        // console.log(restName.split(' ').join('-').toLowerCase());
         window.location.href += e.currentTarget.id;
-        // console.dir(e.currentTarget.id);
     });
 
     $('.kitchen li').click((e) => {
-        $('.selected').removeClass('selected');
+        $('.kitchen .selected').removeClass('selected');
         e.target.classList.add('selected');
-        let url = window.location.href + '?' + $.param({kitchen: e.target.innerText});
+        $('.side-nav .reset').show();
+        filter();
+    });
+
+    $('.side-nav .reset').click((e) => {
+        $('.kitchen .container-body li.selected').removeClass('selected');
+        $('.rating .full-stars i.selected').removeClass('selected');
+        $('.price-tags .icon.selected').removeClass('selected');
+        $(e.target).hide();
+        filter(true);
+    });
+
+    function filter(reset=false) {
+        //debugger;
+        let url = window.location.href + '?';
+        if(reset) {
+            url += 'reset=true';
+        } else {
+            let kitchen = $('.kitchen .selected').text();
+            let rating = $('.rating .full-stars i').index($('.rating .selected')) + 1;
+            let priceTag = '';
+            $('.price-tags .selected').each((id, el) => {
+                priceTag += el.classList[1] + '-';
+                console.log(typeof el.classList[1]);
+            });
+            priceTag = priceTag.slice(0, -1);
+            if(kitchen) {
+                url += 'kitchen=' + kitchen;
+            }
+            if(rating) {
+                url += url.slice(-1) === '?' ? 'rating=' + rating : '&rating=' + rating;
+            }
+            if(priceTag !== '') {
+                url += url.slice(-1) === '?' ? 'pricetag=' + priceTag : '&pricetag=' + priceTag;
+            }
+            console.log(url);
+        }
         fetch(url).then(response => response.json())
             .then(data => addRestaurants(data))
             .catch(error => console.error(error));
-    });
+    }
 });
