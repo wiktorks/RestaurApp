@@ -1,7 +1,6 @@
 @import "../mixins";
 @import "../variables";
 
-
 body {
   margin: 0;
   background-color: $greyBgColor;
@@ -87,10 +86,13 @@ body {
     .reset {
       @include button(150px, 50px, $redColor);
       font-size: 1.2em;
-      padding: 10px 0 32px;
-      margin-bottom: 50px;
+      //padding: 10px 0 32px;
+      //margin-bottom: 50px;
+      padding: 0;
+      margin-bottom: 0;
       border-radius: 10px;
     }
+
     .nav-container {
       width: 60%;
       margin-bottom: 50px;
@@ -123,6 +125,7 @@ body {
           margin: 5px auto;
         }
       }
+
       &.kitchen {
         .container-elem {
           transition: all .2s;
@@ -133,6 +136,7 @@ body {
             background-color: #a0a09f;
             //color: white;
           }
+
           &.selected {
             background-color: $lightRedColor;
             color: #fff;
@@ -180,6 +184,7 @@ body {
         }
       }
     }
+
     .empty-stars i, .full-stars i {
       padding: 0 2px;
       cursor: pointer;
@@ -245,6 +250,7 @@ body {
     }
   }
 }
+
 .ratings {
   position: relative;
   vertical-align: middle;
@@ -259,7 +265,7 @@ body {
     white-space: nowrap;
     overflow: hidden;
     color: $goldColor;
-    width: 0;/* Parametr 'width' do zmiany w zależności od ocen */
+    width: 0; /* Parametr 'width' do zmiany w zależności od ocen */
     &.onhover {
       color: rgba(255, 217, 0, 0.8);
     }

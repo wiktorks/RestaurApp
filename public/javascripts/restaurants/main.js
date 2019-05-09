@@ -1,5 +1,3 @@
-'use strict';
-
 import addRestaurants from './restaurantParser.js';
 
 const getWidth = (e) => {
@@ -12,7 +10,6 @@ const getWidth = (e) => {
 }
 
 $(function () {
-    $('.side-nav .reset').hide();
     $('#search-restaurants').submit(e => {
         e.preventDefault();
         window.location.href = '/restaurants/' + e.target[0].value;
@@ -48,13 +45,19 @@ $(function () {
         stars.css('width', width);
         stars.children().removeClass('selected');
         stars.children().eq(index-1).addClass('selected');
-        $('.side-nav .reset').show();
+        $('.side-nav .reset').animate({
+            padding: '10px 0 32px',
+            marginBottom: '50px'
+        }, 300);
         filter();
     });
 
     $('.price-tags li').click((e) => {
         $(e.currentTarget).toggleClass('selected');
-        $('.side-nav .reset').show();
+        $('.side-nav .reset').animate({
+            padding: '10px 0 32px',
+            marginBottom: '50px'
+        }, 300);
         filter();
     });
 
@@ -65,7 +68,10 @@ $(function () {
     $('.kitchen li').click((e) => {
         $('.kitchen .selected').removeClass('selected');
         e.target.classList.add('selected');
-        $('.side-nav .reset').show();
+        $('.side-nav .reset').animate({
+            padding: '10px 0 32px',
+            marginBottom: '50px'
+        }, 300);
         filter();
     });
 
@@ -73,7 +79,11 @@ $(function () {
         $('.kitchen .container-body li.selected').removeClass('selected');
         $('.rating .full-stars i.selected').removeClass('selected');
         $('.price-tags .icon.selected').removeClass('selected');
-        $(e.target).hide();
+        $('.rating .full-stars').css('width', '0%');
+        $(e.target).animate({
+            padding: 0,
+            margin: 0,
+        }, 200);
         filter(true);
     });
 
