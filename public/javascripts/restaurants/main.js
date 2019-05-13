@@ -61,9 +61,7 @@ $(function () {
         filter();
     });
 
-    $('tr:not(.head)').click((e) => {
-        window.location.href += e.currentTarget.id;
-    });
+    $('tr:not(.head)').click(showDetails);
 
     $('.kitchen li').click((e) => {
         $('.kitchen .selected').removeClass('selected');
@@ -98,7 +96,6 @@ $(function () {
             let priceTag = '';
             $('.price-tags .selected').each((id, el) => {
                 priceTag += el.classList[1] + '-';
-                console.log(typeof el.classList[1]);
             });
             priceTag = priceTag.slice(0, -1);
             if(kitchen) {
@@ -110,10 +107,16 @@ $(function () {
             if(priceTag !== '') {
                 url += url.slice(-1) === '?' ? 'pricetag=' + priceTag : '&pricetag=' + priceTag;
             }
-            console.log(url);
         }
         fetch(url).then(response => response.json())
             .then(data => addRestaurants(data))
+            .then(() => {
+                $('tr:not(.head)').click(showDetails);
+            })
             .catch(error => console.error(error));
     }
 });
+
+function showDetails(e) {
+    window.location.href = window.location.href.replace(/(.*restaurants\/).*/, "$1") + 'details/' + e.currentTarget.id;
+}

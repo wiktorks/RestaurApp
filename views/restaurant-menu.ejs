@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang=pl>
+<head>
+    <%- include part_head.ejs %>
+
+    <link rel="stylesheet" href="/stylesheets/restaurant-details/rest-details.css">
+    <title>Document</title>
+</head>
+<body>
+<% include part_topNav.ejs %>
+
+<section id="main-content">
+    <%- include("part_sideNav", {food: food}) %>
+    <article class="restaurant-details">
+        <ul class="nav-menu">
+            <li class="selected"><a href="#">Menu</a></li>
+            <li><a href="#">Opinie</a></li>
+            <li><a href="#">Informacje</a></li>
+            <li class="back"><a href="#">Powrót</a></li>
+        </ul>
+        <table class="restaurant-menu">
+            <% let i =1; %>
+            <% for(category in food) { %>
+            <tbody>
+                <tr class="category">
+                    <th>
+                        <a class="anchor" id="<%= i++; %>"></a>
+                        <h2><%= category %></h2>
+                    </th>
+                </tr>
+                <% for(item of food[category]) {%>
+                <tr>
+                    <td>
+                        <h3><%= item.Nazwa %></h3>
+                        <p class="description"><%= item.Opis %></p>
+                        <p class="ingredients">Składniki: <%= item.Skladniki %></p>
+                        <p class="price">Cena: <%= item.Cena %>zł</p>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+            <% } %>
+        </table>
+    </article>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/javascripts/restaurant-details/main.js"></script>
+</body>
+</html>
