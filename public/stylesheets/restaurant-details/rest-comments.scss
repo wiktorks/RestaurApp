@@ -1,0 +1,40 @@
+@import "../mixins";
+@import "../variables";
+@import "rest-base";
+
+.comment {
+  width: 80%;
+  border: 2px solid black;
+  position: relative;
+  margin-left: 50px;
+  min-height: 80px;
+  display: flex;
+  border-radius: 7px;
+}
+
+.arrow, .cover {
+  background-color: #fff;
+  position: absolute;
+  top: 40px;
+}
+
+.arrow {
+  width: 30px;
+  height: 30px;
+  border: 2px solid black;
+  left: -8px;
+  transform: translate(0, -50%) rotate(45deg);
+}
+.cover {
+  height: 50px;
+  width: 40px;
+  transform: translate(0, -50%);
+  z-index: 0;
+}
+p {
+  width: 100%;
+  z-index: 1;
+  padding: 10px;
+  margin: 0;
+}
+

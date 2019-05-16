@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang=pl>
+<head>
+    <%- include part_head.ejs %>
+
+    <link rel="stylesheet" href="/stylesheets/restaurant-details/rest-comments.css">
+    <title>Document</title>
+</head>
+<body>
+<% include part_topNav.ejs %>
+
+<section id="main-content">
+    <nav class="side-nav">
+        <div class="nav-container">
+            <div class="container-head">
+                <h3>Kategorie dań</h3>
+            </div>
+            <ul class="container-body">
+                <% let i = 1 %>
+                <% for(category of food) { %>
+                    <li class="container-elem">
+                        <a href="#<%= i++; %>"><%= category.Kategoria %></a>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </nav>
+    <article class="restaurant-details">
+        <ul class="nav-menu">
+            <li><a href="#">Menu</a></li>
+            <li class="selected"><a href="#">Opinie</a></li>
+            <li><a href="#">Informacje</a></li>
+            <li class="back"><a href="#">Powrót</a></li>
+        </ul>
+
+    </article>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/javascripts/restaurant-details/main.js"></script>
+</body>
+</html>

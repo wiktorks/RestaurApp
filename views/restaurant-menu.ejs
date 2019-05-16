@@ -10,7 +10,21 @@
 <% include part_topNav.ejs %>
 
 <section id="main-content">
-    <%- include("part_sideNav", {food: food}) %>
+    <nav class="side-nav">
+        <div class="nav-container">
+            <div class="container-head">
+                <h3>Kategorie dań</h3>
+            </div>
+            <ul class="container-body">
+                <% let i = 1 %>
+                <% for(category in food) { %>
+                    <li class="container-elem">
+                        <a href="#<%= i++; %>"><%= category %></a>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </nav>
     <article class="restaurant-details">
         <ul class="nav-menu">
             <li class="selected"><a href="#">Menu</a></li>
@@ -19,7 +33,7 @@
             <li class="back"><a href="#">Powrót</a></li>
         </ul>
         <table class="restaurant-menu">
-            <% let i =1; %>
+            <% i =1; %>
             <% for(category in food) { %>
             <tbody>
                 <tr class="category">

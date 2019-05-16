@@ -133,27 +133,37 @@ body {
           width: 100%;
           border-bottom: 3px solid #d9534f; }
 
-table.restaurant-menu {
-  width: 100%;
-  border-spacing: 0 5px; }
-  table.restaurant-menu tr th {
-    background-color: #dadada;
-    position: relative; }
-    table.restaurant-menu tr th a {
-      position: absolute;
-      top: -72px; }
-  table.restaurant-menu tr td {
-    background-color: #fff;
-    padding: 20px;
-    border: 1px solid #dadada; }
-    table.restaurant-menu tr td h3 {
-      margin-top: 0; }
-    table.restaurant-menu tr td p.ingredients {
-      font-style: italic; }
-    table.restaurant-menu tr td p.price {
-      color: #d9534f;
-      font-size: 1.1em;
-      font-weight: bold;
-      margin-bottom: 0; }
+.comment {
+  width: 80%;
+  border: 2px solid black;
+  position: relative;
+  margin-left: 50px;
+  min-height: 80px;
+  display: flex;
+  border-radius: 7px; }
 
-/*# sourceMappingURL=rest-details.css.map */
+.arrow, .cover {
+  background-color: #fff;
+  position: absolute;
+  top: 40px; }
+
+.arrow {
+  width: 30px;
+  height: 30px;
+  border: 2px solid black;
+  left: -8px;
+  transform: translate(0, -50%) rotate(45deg); }
+
+.cover {
+  height: 50px;
+  width: 40px;
+  transform: translate(0, -50%);
+  z-index: 0; }
+
+p {
+  width: 100%;
+  z-index: 1;
+  padding: 10px;
+  margin: 0; }
+
+/*# sourceMappingURL=rest-comments.css.map */

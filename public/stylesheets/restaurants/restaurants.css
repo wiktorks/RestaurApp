@@ -89,7 +89,8 @@ body {
       font-size: 1.2em;
       padding: 0;
       margin-bottom: 0;
-      border-radius: 10px; }
+      border-radius: 10px;
+      height: 0; }
       #main-content .side-nav .reset:hover {
         background-color: #a02622; }
     #main-content .side-nav .nav-container {

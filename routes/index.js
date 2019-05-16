@@ -9,9 +9,6 @@ router.get('/', function (req, res, next) {
     res.render('index', {title: 'Express'});
 });
 
-router.post('/', function (req, res) {
-    var link = '/restaurants?str=' + req.body.name;
-    res.redirect(link);
-});
+
 
 module.exports = router;

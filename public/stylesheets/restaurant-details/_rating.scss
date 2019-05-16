@@ -1,0 +1,24 @@
+.ratings {
+  position: relative;
+  vertical-align: middle;
+  display: inline-block;
+  overflow: hidden;
+  font-size: 1.7em;
+
+  .full-stars {
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    color: $goldColor;
+    width: 0; /* Parametr 'width' do zmiany w zależności od ocen */
+    &.onhover {
+      color: rgba(255, 217, 0, 0.8);
+    }
+  }
+
+  .empty-stars {
+    color: #8b8a8a;
+  }
+}
