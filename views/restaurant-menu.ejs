@@ -10,7 +10,7 @@
 <% include part_topNav.ejs %>
 
 <section id="main-content">
-    <nav class="side-nav">
+    <nav class="side-nav" style="margin-left: <%= navSize %>%">
         <div class="nav-container">
             <div class="container-head">
                 <h3>Kategorie dań</h3>
@@ -25,12 +25,12 @@
             </ul>
         </div>
     </nav>
-    <article class="restaurant-details">
+    <article class="restaurant-details" style="margin-left: <%= parseInt(navSize, 10) + 25 %>%">
         <ul class="nav-menu">
             <li class="selected"><a href="#">Menu</a></li>
             <li><a href="#">Opinie</a></li>
             <li><a href="#">Informacje</a></li>
-            <li class="back"><a href="#">Powrót</a></li>
+            <li class="back"><a href="/restaurants/<%= address %>">Powrót</a></li>
         </ul>
         <table class="restaurant-menu">
             <% i =1; %>
@@ -58,6 +58,7 @@
     </article>
 </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="/javascripts/restaurant-details/main.js"></script>
+<script src="/scripts/jquery.typeahead.min.js"></script>
+<script type="module" src="/javascripts/restaurant-details/main.js"></script>
 </body>
 </html>

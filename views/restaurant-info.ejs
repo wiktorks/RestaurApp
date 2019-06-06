@@ -3,14 +3,14 @@
 <head>
     <%- include part_head.ejs %>
 
-    <link rel="stylesheet" href="/stylesheets/restaurant-details/rest-comments.css">
+    <link rel="stylesheet" href="/stylesheets/restaurant-details/rest-info.css">
     <title>Document</title>
 </head>
 <body>
 <% include part_topNav.ejs %>
 
 <section id="main-content">
-    <nav class="side-nav">
+    <nav class="side-nav" style="margin-left: <%= navSize %>%">
         <div class="nav-container">
             <div class="container-head">
                 <h3>Kategorie dań</h3>
@@ -19,23 +19,38 @@
                 <% let i = 1 %>
                 <% for(category of food) { %>
                     <li class="container-elem">
-                        <a href="#<%= i++; %>"><%= category.Kategoria %></a>
+                        <a href="http://localhost:3000/restaurants/details/<%= restId %>/menu?nav=0#<%= i++; %>"><%= category.Kategoria %></a>
                     </li>
                 <% } %>
             </ul>
         </div>
     </nav>
-    <article class="restaurant-details">
+    <article class="restaurant-details" style="margin-left: <%= parseInt(navSize, 10) + 25 %>%">
         <ul class="nav-menu">
             <li><a href="#">Menu</a></li>
             <li><a href="#">Opinie</a></li>
             <li class="selected"><a href="#">Informacje</a></li>
-            <li class="back"><a href="#">Powrót</a></li>
+            <li class="back"><a href="/restaurants/<%= restInfo.adres %>">Powrót</a></li>
         </ul>
+        <section id="rest-info">
+            <div class="info">
+                <div class="detail-container">
+                    <div class="img"></div>
+                    <ul>
+                        <li><span>Nazwa</span>: <%= restInfo.nazwa %></li>
+                        <li><span>Adres</span>: <%= restInfo.adres %></li>
+                        <li><span>Kontakt</span>: <%= restInfo.kontakt %></li>
+                    </ul>
+                </div>
+                <p class="description"><%= restInfo.opis %></p>
+            </div>
+            <div class="map"></div>
 
+        </section>
     </article>
 </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="/javascripts/restaurant-details/main.js"></script>
+<script src="/scripts/jquery.typeahead.min.js"></script>
+<script type="module" src="/javascripts/restaurant-details/main.js"></script>
 </body>
 </html>

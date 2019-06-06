@@ -7,6 +7,8 @@ $(function () {
         window.location.href = '/restaurants/' + e.target[0].value;
     });
 
+    //$('.log-register-forms ')
+
     $('.log-register-forms').css('width', '200%');
 
     $('.container').each((idx, el) => {

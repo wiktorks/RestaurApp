@@ -1,4 +1,3 @@
-@charset "UTF-8";
 body {
   margin: 0;
   background-color: #F8F5F2;
@@ -602,95 +601,36 @@ body {
     .typeahead__label .typeahead__cancel-button:hover {
       background-color: #d5e9f9; }
 
-.opinions .comment-container .comment .arrow, .opinions .comment-container .comment .cover {
-  background-color: white;
-  position: absolute;
-  top: 40px; }
-
-.opinions {
+#rest-info {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  margin-top: 20px; }
-  .opinions .rate-bar {
-    display: flex;
-    margin: 0 50px;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: #d9534f;
-    color: white; }
-    .opinions .rate-bar p {
-      font-size: 1.6em;
-      margin: 0 20px;
-      text-align: center; }
-      .opinions .rate-bar p:last-child {
-        font-size: 1.2em;
-        width: 150px; }
-    .opinions .rate-bar .bar {
-      width: 0;
-      height: 40px;
-      border: 1px solid white;
-      margin: 10px 0;
-      background-color: #fff; }
-  .opinions .comment-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    margin-top: 36px; }
-    .opinions .comment-container .profile {
-      text-align: center;
-      width: 143px;
+  align-items: flex-start;
+  flex-wrap: wrap; }
+  #rest-info .info {
+    flex-basis: 50%;
+    margin-top: 50px; }
+    #rest-info .info .detail-container .img {
+      background-image: url("http://webneel.com/sites/default/files/images/manual/logo-restaurant/best-restaurant-logo-design%20(2).gif");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
       display: inline-block;
-      margin: 0; }
-      .opinions .comment-container .profile img {
-        width: 70px;
-        height: auto; }
-      .opinions .comment-container .profile .ratings {
-        font-size: .9em; }
-    .opinions .comment-container .comment {
-      width: 65%;
-      border: 1px solid rgba(0, 0, 255, 0.8);
-      position: relative;
-      min-height: 80px;
-      display: inline-flex;
-      border-radius: 7px;
-      background-color: white; }
-      .opinions .comment-container .comment .arrow {
-        width: 30px;
-        height: 30px;
-        border: 1px solid rgba(0, 0, 255, 0.8);
-        left: -8px;
-        transform: translate(0, -50%) rotate(45deg); }
-      .opinions .comment-container .comment .cover {
-        height: 50px;
-        width: 40px;
-        transform: translate(0, -50%);
-        z-index: 0; }
-      .opinions .comment-container .comment p {
-        width: 100%;
-        z-index: 1;
-        padding: 10px;
-        margin: 0; }
+      height: 200px;
+      width: 300px; }
+    #rest-info .info .detail-container ul {
+      list-style-type: none;
+      display: inline-block;
+      vertical-align: bottom;
+      font-size: 1.3em; }
+      #rest-info .info .detail-container ul li {
+        margin-bottom: 20px; }
+        #rest-info .info .detail-container ul li span {
+          color: #FF8000; }
+    #rest-info .info p {
+      padding: 20px 30px; }
+  #rest-info .map {
+    flex-basis: 50%;
+    height: 400px;
+    background-color: #fff; }
 
-.ratings {
-  position: relative;
-  vertical-align: middle;
-  display: inline-block;
-  overflow: hidden;
-  font-size: 1.7em;
-  margin: 0 20px; }
-  .ratings .full-stars {
-    position: absolute;
-    left: 0;
-    top: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    color: #ffd900;
-    width: 0;
-    /* Parametr 'width' do zmiany w zależności od ocen */ }
-    .ratings .full-stars.onhover {
-      color: rgba(255, 217, 0, 0.8); }
-  .ratings .empty-stars {
-    color: #8b8a8a; }
-
-/*# sourceMappingURL=rest-comments.css.map */
+/*# sourceMappingURL=rest-info.css.map */

@@ -10,7 +10,7 @@
 <% include part_topNav.ejs %>
 
 <section id="main-content">
-    <nav class="side-nav">
+    <nav class="side-nav" style="margin-left: <%= navSize %>%">
         <div class="nav-container">
             <div class="container-head">
                 <h3>Kategorie dań</h3>
@@ -19,23 +19,42 @@
                 <% let i = 1 %>
                 <% for(category of food) { %>
                     <li class="container-elem">
-                        <a href="#<%= i++; %>"><%= category.Kategoria %></a>
+                        <a href="http://localhost:3000/restaurants/details/<%= restId %>/menu?nav=0#<%= i++; %>"><%= category.Kategoria %></a>
                     </li>
                 <% } %>
             </ul>
         </div>
     </nav>
-    <article class="restaurant-details">
+    <article class="restaurant-details" style="margin-left: <%= parseInt(navSize, 10) + 25 %>%">
         <ul class="nav-menu">
             <li><a href="#">Menu</a></li>
             <li class="selected"><a href="#">Opinie</a></li>
             <li><a href="#">Informacje</a></li>
-            <li class="back"><a href="#">Powrót</a></li>
+            <li class="back"><a href="/restaurants/<%= comments[0].Adres %>">Powrót</a></li>
         </ul>
-
+        <section class="opinions">
+            <h1><%= comments[0].Nazwa %></h1>
+            <div class="rate-bar">
+                <p>Średnia ocen: <%= comments[0].Srednia_Ocen.toFixed(1) %></p>
+                <div class="bar"></div>
+                <%- include("part_ratings", {rate: comments[0].Srednia_Ocen})%>
+                <div class="bar"></div>
+                <p>Na podstawie <%= comments.length %> opinii</p>
+            </div>
+            <% for(comment of comments) { %>
+            <div class="comment-container">
+                <figure class="profile">
+                    <img src="/images/user.png" alt="Zdjęcie użytkownika">
+                    <figcaption class="profile-rating"><%- include("part_ratings", {rate: comment.Ocena})%></figcaption>
+                </figure>
+                <%- include('part_comment', {name: comment.Login, message: comment.Komentarz}) %>
+            </div>
+            <% } %>
+        </section>
     </article>
 </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="/javascripts/restaurant-details/main.js"></script>
+<script src="/scripts/jquery.typeahead.min.js"></script>
+<script type="module" src="/javascripts/restaurant-details/main.js"></script>
 </body>
 </html>

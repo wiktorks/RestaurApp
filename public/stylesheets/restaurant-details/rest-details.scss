@@ -1,6 +1,7 @@
 @import "../mixins";
 @import "../variables";
 @import "rest-base";
+@import "../../../node_modules/jquery-typeahead/src/jquery.typeahead.scss";
 
 table.restaurant-menu {
   width: 100%;

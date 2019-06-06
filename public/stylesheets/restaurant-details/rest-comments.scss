@@ -1,40 +1,119 @@
 @import "../mixins";
 @import "../variables";
 @import "rest-base";
+@import "../../../node_modules/jquery-typeahead/src/jquery.typeahead.scss";
 
-.comment {
-  width: 80%;
-  border: 2px solid black;
-  position: relative;
-  margin-left: 50px;
-  min-height: 80px;
-  display: flex;
-  border-radius: 7px;
-}
 
-.arrow, .cover {
-  background-color: #fff;
+%common {
+  background-color: white;
   position: absolute;
   top: 40px;
 }
 
-.arrow {
-  width: 30px;
-  height: 30px;
-  border: 2px solid black;
-  left: -8px;
-  transform: translate(0, -50%) rotate(45deg);
-}
-.cover {
-  height: 50px;
-  width: 40px;
-  transform: translate(0, -50%);
-  z-index: 0;
-}
-p {
-  width: 100%;
-  z-index: 1;
-  padding: 10px;
-  margin: 0;
-}
+.opinions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  .rate-bar {
+    display: flex;
+    margin: 0 50px;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: $redColor;
+    color: white;
+    p {
+      font-size: 1.6em;
+      margin: 0 20px;
+      text-align: center;
+      &:last-child {
+        font-size: 1.2em;
+        width: 150px;
+      }
+    }
 
+    .bar {
+      width: 0;
+      height: 40px;
+      border: 1px solid white;
+      margin: 10px 0;
+      background-color: #fff;
+    }
+  }
+
+  .comment-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 36px;
+    .profile {
+      text-align: center;
+      width: 143px;
+      display: inline-block;
+      margin: 0;
+      img {
+        width: 70px;
+        height: auto;
+      }
+      .ratings {
+        font-size: .9em;
+      }
+    }
+    .comment {
+      width: 65%;
+      border: 1px solid $blueCommentBgColor;
+      position: relative;
+      min-height: 80px;
+      display: inline-flex;
+      border-radius: 7px;
+      background-color: white;
+      .arrow {
+        @extend %common;
+        width: 30px;
+        height: 30px;
+        border: 1px solid $blueCommentBgColor;
+        left: -8px;
+        transform: translate(0, -50%) rotate(45deg);
+      }
+
+      .cover {
+        @extend %common;
+        height: 50px;
+        width: 40px;
+        transform: translate(0, -50%);
+        z-index: 0;
+      }
+
+      p {
+        width: 100%;
+        z-index: 1;
+        padding: 10px;
+        margin: 0;
+      }
+    }
+  }
+}
+.ratings {
+  position: relative;
+  vertical-align: middle;
+  display: inline-block;
+  overflow: hidden;
+  font-size: 1.7em;
+  margin: 0 20px;
+  .full-stars {
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    color: $goldColor;
+    width: 0; /* Parametr 'width' do zmiany w zależności od ocen */
+
+    &.onhover {
+      color: rgba(255, 217, 0, 0.8);
+    }
+  }
+  .empty-stars {
+    color: #8b8a8a;
+  }
+}

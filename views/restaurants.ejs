@@ -2,7 +2,7 @@
 <html lang="pl">
 
 <head>
-    <% include part_head.ejs %>
+    <%- include part_head.ejs %>
 
     <link rel="stylesheet" href="/stylesheets/restaurants/restaurants.css">
     <title>Document</title>
@@ -13,14 +13,34 @@
     <ul>
         <li>
             <div id="nav-button" class="icon"><i class="fas fa-bars"></i></div>
+<!--            <form id="search-restaurants">-->
+<!--                <input type="text" name="typeahead">-->
+<!--                <input type="submit">-->
+<!--            </form>-->
             <form id="search-restaurants">
-                <input type="text">
-                <input type="submit">
+                <div class="typeahead__container">
+                    <div class="typeahead__field">
+                        <div class="typeahead__query">
+                            <input class="js-typeahead"
+                                   name="q"
+                                   type="search"
+                                   autocomplete="off">
+                        </div>
+                        <div class="typeahead__button">
+                            <button type="submit">
+                                <span class="typeahead__search-icon"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </form>
         </li>
         <li>
             <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
             <div class="icon"><i class="fas fa-sign-in-alt"></i></div>
+            <% if(logged) {%>
+                <a href="/logout"><%= user.login %></a>
+            <% } %>
         </li>
     </ul>
 </nav>
@@ -96,9 +116,7 @@
                 <% for(item of restaurants) { %>
                     <tr id="<%= item.Id_Restaruacja %>">
                         <td class="rest-image">
-                            <div class="img">
-
-                            </div>
+                            <div class="img"></div>
                         </td>
                         <td class="rest-name">
                             <p class="restaurant-name"><%= item.Nazwa %></p>
@@ -124,22 +142,7 @@
                             </div>
                         </td>
                         <td class="rest-rating">
-                            <div class="ratings">
-                                <div class="empty-stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div class="full-stars" style="width: <%= (item.Srednia_Ocen / 5) * 100 %>%">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                            </div>
+                            <%- include("part_ratings", {rate: item.Srednia_Ocen})%>
                         </td>
 
                     </tr>
@@ -153,6 +156,7 @@
     </article>
 </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/scripts/jquery.typeahead.min.js"></script>
 <script type="module" src="/javascripts/restaurants/main.js"></script>
 </body>
 

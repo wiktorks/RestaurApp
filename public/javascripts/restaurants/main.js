@@ -1,4 +1,5 @@
 import addRestaurants from './restaurantParser.js';
+import {options} from '../searchEngine.js';
 
 const getWidth = (e) => {
     let counter = 1;
@@ -9,12 +10,10 @@ const getWidth = (e) => {
     return counter;
 }
 
-$(function () {
-    $('#search-restaurants').submit(e => {
-        e.preventDefault();
-        window.location.href = '/restaurants/' + e.target[0].value;
-    });
 
+
+$(function () {
+    $.typeahead(options);
     $('#nav-button').click(() => {
         if($('.side-nav').css('margin-left') === '0px') {
             $('.side-nav').animate({
@@ -84,38 +83,38 @@ $(function () {
         }, 200);
         filter(true);
     });
-
-    function filter(reset=false) {
-        //debugger;
-        let url = window.location.href + '?';
-        if(reset) {
-            url += 'reset=true';
-        } else {
-            let kitchen = $('.kitchen .selected').text();
-            let rating = $('.rating .full-stars i').index($('.rating .selected')) + 1;
-            let priceTag = '';
-            $('.price-tags .selected').each((id, el) => {
-                priceTag += el.classList[1] + '-';
-            });
-            priceTag = priceTag.slice(0, -1);
-            if(kitchen) {
-                url += 'kitchen=' + kitchen;
-            }
-            if(rating) {
-                url += url.slice(-1) === '?' ? 'rating=' + rating : '&rating=' + rating;
-            }
-            if(priceTag !== '') {
-                url += url.slice(-1) === '?' ? 'pricetag=' + priceTag : '&pricetag=' + priceTag;
-            }
-        }
-        fetch(url).then(response => response.json())
-            .then(data => addRestaurants(data))
-            .then(() => {
-                $('tr:not(.head)').click(showDetails);
-            })
-            .catch(error => console.error(error));
-    }
 });
+
+function filter(reset=false) {
+    //debugger;
+    let url = window.location.href + '?';
+    if(reset) {
+        url += 'reset=true';
+    } else {
+        let kitchen = $('.kitchen .selected').text();
+        let rating = $('.rating .full-stars i').index($('.rating .selected')) + 1;
+        let priceTag = '';
+        $('.price-tags .selected').each((id, el) => {
+            priceTag += el.classList[1] + '-';
+        });
+        priceTag = priceTag.slice(0, -1);
+        if(kitchen) {
+            url += 'kitchen=' + kitchen;
+        }
+        if(rating) {
+            url += url.slice(-1) === '?' ? 'rating=' + rating : '&rating=' + rating;
+        }
+        if(priceTag !== '') {
+            url += url.slice(-1) === '?' ? 'pricetag=' + priceTag : '&pricetag=' + priceTag;
+        }
+    }
+    fetch(url).then(response => response.json())
+        .then(data => addRestaurants(data))
+        .then(() => {
+            $('tr:not(.head)').click(showDetails);
+        })
+        .catch(error => console.error(error));
+}
 
 function showDetails(e) {
     window.location.href = window.location.href.replace(/(.*restaurants\/).*/, "$1") + 'details/' + e.currentTarget.id;

@@ -43,9 +43,9 @@
     </div>
     <div class="log-register-forms">
         <div class="container log-container">
-            <form class="login" action="">
-                <input type="email" placeholder="Email">
-                <input type="text" placeholder="Hasło">
+            <form class="login" action="/login" method="post">
+                <input name="email" type="email" placeholder="Email" required>
+                <input name="passwd" type="password" placeholder="Hasło" required>
                 <input type="submit" value="Zaloguj">
             </form>
         </div>

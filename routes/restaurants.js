@@ -4,13 +4,23 @@ var router = express.Router();
 const db = require('../lib/dbconfig/dbconnection');
 
 router.get('/:search', function (req, res) {
+    //let searchWords = req.params.search.split('-');
     let sql = 'SELECT Id_Restaruacja, Nazwa, Srednia_Ocen, Srednia_Cen FROM restauracja WHERE Adres LIKE ?';
     if(Object.entries(req.query).length === 0 && req.query.constructor === Object) { // Czy nie ma parametrów filtrowania
-        db.query(sql, [ `%${req.params.search}%`], function (err, restaurants) {
+        let params = req.params.search.split('-').filter((el) => {
+            return el !== '';
+        });
+        if(params.length > 1) sql += 'AND Miasto LIKE ?';
+
+        db.query(sql, [ `%${params[0]}%`, `%${params[1]}%`], function (err, restaurants) {
             if (err) throw err;
             db.query('SELECT Nazwa FROM kuchnia', function (err, kitchen) {
                 if (err) throw err;
-                res.render('restaurants', {restaurants: restaurants, kitchen: kitchen});
+                if(req.isAuthenticated()) {
+                    res.render('restaurants', {restaurants: restaurants, kitchen: kitchen, logged: true, user: req.user})
+                } else {
+                    res.render('restaurants', {restaurants: restaurants, kitchen: kitchen, logged: false});
+                }
             });
         });
     } else {
@@ -28,15 +38,29 @@ router.get('/:search', function (req, res) {
                 sql += ' AND Srednia_Cen IN (?)';
                 queryData.push(req.query.pricetag.split('-'));
             }
-            console.log(sql + ' -> ' + queryData);
         }
         db.query(sql, queryData, function(err, restaurants) {
             if (err) throw err;
-            res.send({dane: restaurants});
+            res.send(JSON.stringify({dane: restaurants}));
         });
     }
 });
 
+
+router.post('/:search/suggestion', function (req, res) {
+    let params = req.body.phrase.split(' ').filter((el) => {
+        return el !== '';
+    });
+    let json = [];
+    db.query("SELECT DISTINCT Adres, Miasto FROM `restauracja` WHERE Adres LIKE ?", [params[0] + '%'], function (err, data) {
+        if(err) throw err;
+        for(let pair of data) {
+            json.push({"street": pair.Adres, "city": pair.Miasto});
+        }
+        console.log(json);
+        res.send(json);
+    });
+});
 /*router.post('/:search', function(req, res) {
 
     let data = req.body.answer;

@@ -6,13 +6,18 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "~4.16.0",
+    "express-session": "^1.16.1",
     "http-errors": "~1.6.2",
+    "jquery-typeahead": "^2.10.6",
     "morgan": "~1.9.0",
     "mysql": "^2.16.0",
-    "node-sass-middleware": "0.11.0"
+    "node-sass-middleware": "0.11.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
   }
 }

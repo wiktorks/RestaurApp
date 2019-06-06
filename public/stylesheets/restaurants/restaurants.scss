@@ -1,5 +1,6 @@
 @import "../mixins";
 @import "../variables";
+@import "../../../node_modules/jquery-typeahead/src/jquery.typeahead.scss";
 
 body {
   margin: 0;
@@ -14,7 +15,7 @@ body {
   width: 100%;
   background-color: rgba(130, 130, 130, 0.5);
 
-  ul {
+  ul:not(.typeahead__list) {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -33,22 +34,8 @@ body {
         margin-left: 100px;
         display: flex;
         align-items: center;
-
-        input {
-          &[type="text"] {
-            height: 30px;
-            font-size: 1.1rem;
-            padding: 2px;
-            width: 300px;
-            margin-right: 10px;
-          }
-
-          &[type="submit"] {
-            @include button(70px, 30px, $redColor);
-            font-size: 15px;
-            padding: 2px;
-            // height: 30px;
-          }
+        button {
+          //background-color: $redColor;
         }
       }
 
@@ -71,7 +58,7 @@ body {
 
   .side-nav {
     width: 25%;
-    height: calc(100% - 172px);
+    height: calc(100% - 122px);
     overflow: auto;
     display: flex;
     flex-direction: column;
@@ -80,7 +67,7 @@ body {
     position: fixed;
     top: 72px;
     left: 0;
-    padding-top: 100px;
+    padding-top: 50px;
     margin-left: 0;
 
     .reset {

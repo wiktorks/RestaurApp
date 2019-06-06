@@ -1,0 +1,53 @@
+@import "../mixins";
+@import "../variables";
+@import "rest-base";
+@import "../../../node_modules/jquery-typeahead/src/jquery.typeahead.scss";
+
+#rest-info {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  
+  .info {
+    flex-basis: 50%;
+    margin-top: 50px;
+    
+    .detail-container {
+      
+      .img {
+        background-image: url("http://webneel.com/sites/default/files/images/manual/logo-restaurant/best-restaurant-logo-design%20(2).gif");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: inline-block;
+        height: 200px;
+        width: 300px;
+      }
+
+      ul {
+        list-style-type: none;
+        display: inline-block;
+        vertical-align: bottom;
+        font-size: 1.3em;
+
+        li {
+          margin-bottom: 20px;
+
+          span {
+            color: $orangeColor;
+          }
+        }
+      }
+    }
+
+    p {
+      padding: 20px 30px;
+    }
+  }
+  .map {
+    flex-basis: 50%;
+    height: 400px;
+    background-color: #fff;
+  }
+}

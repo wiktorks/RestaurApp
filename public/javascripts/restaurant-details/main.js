@@ -1,7 +1,9 @@
+import {options} from '../searchEngine.js';
+
 $(function(){
-    // $('#search-restaurants').submit(submitter);
+    $.typeahead(options);
     $('#nav-button').click(navToggle);
-    $('.nav-menu li').click(getDetails);
+    $('.nav-menu li:not(.back)').click(getDetails);
 });
 
 function navToggle() {
@@ -24,6 +26,8 @@ function navToggle() {
 
 function getDetails(e) {
     let url = window.location.href.match(/.*\/restaurants\/details\/[^\/]*/g);
+    let sideNav = $('.side-nav');
+    let marginSize = sideNav.css('margin-left') === '0px' ? '0' : '-25';
     switch(e.currentTarget.innerText) {
         case 'Menu':
             url += '/menu';
@@ -35,5 +39,5 @@ function getDetails(e) {
             url += '/information';
             break;
     }
-    window.location.href = url;
+    window.location.href = url + '?nav=' + marginSize;
 }
