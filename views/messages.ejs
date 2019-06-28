@@ -1,0 +1,84 @@
+<style>
+    #messages {
+        display: flex;
+        justify-content: center;
+        margin-bottom: -30px;
+    }
+
+    #messages .message {
+        display: inline-flex;
+        padding: 0 40px;
+        height: 90px;
+        border-radius: 10px;
+        align-items: center;
+        justify-content: space-between;
+        width: 300px;
+        position: relative;
+        transition: all .4s;
+        overflow: hidden;
+    }
+
+    #messages .message.success {
+        border: 3px solid lightgreen;
+        background-color: #e7fde9;
+        color: green;
+    }
+
+    #messages .message.error {
+        border: 3px solid #d9534f;
+        background-color: #d9b0b3;
+        color: red;
+    }
+
+    #messages .message p {
+        display: inline-block;
+        margin: 0;
+        font-size: 1.1em;
+    }
+
+    #messages .message .mark {
+        font-size: 2.5em;
+    }
+
+    #messages .message .buttonCancel {
+        position: absolute;
+        top: 0;
+        right: 5px;
+    }
+
+    #messages .message .buttonCancel:hover {
+        color: white;
+        cursor: pointer;
+    }
+
+    #messages .message.hidden {
+        height: 0;
+        border: 0;
+    }
+</style>
+
+<div id="messages">
+    <% Object.keys(messages).forEach(function (type) { %>
+        <div class="message <%= type %>">
+            <% messages[type].forEach(function (message) { %>
+                <p><%= message %></p>
+                <span class="mark">
+                    <% if(type === 'success') { %> &#x2714;
+                    <% } else { %> &#10008; <% } %>
+                </span>
+                <span class="buttonCancel">&#10006;</span>
+            <% }) %>
+        </div>
+    <% }) %>
+</div>
+<script type="text/javascript">
+    let messageBox = document.getElementsByClassName('message')[0];
+    let messageButton = document.getElementsByClassName('buttonCancel')[0];
+    let container = document.getElementById('messages');
+
+    messageButton.addEventListener('click', () => {
+        messageBox.classList.add('hidden');
+        container.style.height = '0';
+        container.style.margin = '0';
+    });
+</script>

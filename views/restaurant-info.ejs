@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-<% include part_topNav.ejs %>
+<%- include('part_topNav', {authenticated: authenticated, userName: userName}) %>
 
 <section id="main-content">
     <nav class="side-nav" style="margin-left: <%= navSize %>%">
@@ -19,7 +19,7 @@
                 <% let i = 1 %>
                 <% for(category of food) { %>
                     <li class="container-elem">
-                        <a href="http://localhost:3000/restaurants/details/<%= restId %>/menu?nav=0#<%= i++; %>"><%= category.Kategoria %></a>
+                        <a href="/restaurants/details/<%= restId %>/menu?nav=0#<%= i++; %>"><%= category.Kategoria %></a>
                     </li>
                 <% } %>
             </ul>
@@ -33,19 +33,20 @@
             <li class="back"><a href="/restaurants/<%= restInfo.adres %>">Powrót</a></li>
         </ul>
         <section id="rest-info">
-            <div class="info">
+            <div class="info" style="flex-basis: <%= parseInt(navSize, 10) + 75%>%">
                 <div class="detail-container">
                     <div class="img"></div>
                     <ul>
                         <li><span>Nazwa</span>: <%= restInfo.nazwa %></li>
-                        <li><span>Adres</span>: <%= restInfo.adres %></li>
+                        <li><span>Miasto</span>: <%= restInfo.miasto %></li>
+                        <li><span>Adres</span>: <%= restInfo.adres %> <%= restInfo.nrDomu %></li>
                         <li><span>Kontakt</span>: <%= restInfo.kontakt %></li>
                     </ul>
+                    <p class="description"><%= restInfo.opis %></p>
                 </div>
-                <p class="description"><%= restInfo.opis %></p>
             </div>
-            <div class="map"></div>
-
+<!--            <div id="map" style="flex-basis: <%# navSize === '-25' ? 50 : 100 %>%"></div>-->
+            <iframe id="map" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=<%= restInfo.adres %>+<%= restInfo.nrDomu %>>+<%= restInfo.miasto %>%&amp;ie=UTF8&amp;t=&amp;z=16&amp;iwloc=B&amp;output=embed" style="flex-basis: <%= navSize === '-25' ? 50 : 100 %>%" allowfullscreen></iframe>
         </section>
     </article>
 </section>

@@ -1,7 +1,6 @@
 <nav id="top-nav">
-    <ul class="top-list">
+    <ul>
         <li>
-            <div id="nav-button" class="icon"><i class="fas fa-bars"></i></div>
             <form id="search-restaurants">
                 <div class="typeahead__container">
                     <div class="typeahead__field">
@@ -20,12 +19,14 @@
                 </div>
             </form>
         </li>
+        <li class="profile-container">
+            <div id="profile">
+                <div class="profile-pic"><i class="fas fa-user-circle"></i></div>
+                <p class="profile-name">Nazwa użytkownika</p>
+            </div>
+        </li>
         <li>
-            <%if(authenticated) {%>
-                <%- include('part_profile_menu', {userName: userName}) %>
-            <% } else {%>
-
-            <% } %>
+            <div class="icon"><i class="fas fa-sign-in-alt"></i></div>
         </li>
     </ul>
 </nav>

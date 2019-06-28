@@ -1,13 +1,21 @@
-$(function () {
-    // const formContainer = $('.log-register-forms');
-
+let submitter = () => {
     $('form.search').submit(function(e) {
         e.preventDefault();
-        console.log('/restaurants/' + e.target[0].value);
         window.location.href = '/restaurants/' + e.target[0].value;
     });
+}
 
-    //$('.log-register-forms ')
+$(function () {
+    submitter();
+    checkIfLogin();
+
+    /*$('#login a').on('click', () => {
+        $('.log-buttons .btn-log h2').click();
+    });
+
+    $('#join a').on('click', () => {
+        $('.log-buttons .btn-reg h2').click();
+    });*/
 
     $('.log-register-forms').css('width', '200%');
 
@@ -20,25 +28,41 @@ $(function () {
 
     $('.log-buttons .btn-log h2').click(function () {
         slideLog($(this));
+        /*let string = window.location.href;
+        string = string.replace('#join', '#login');
+        window.location.href = string;*/
     });
     $('.log-buttons .btn-reg h2').click(function () {
         slideLog($(this));
+        /*let string = window.location.href;
+        string = string.replace('#login', '#join');
+        window.location.href = string;*/
     });
-
-    function slideLog(selected) {
-        if(selected.hasClass('selected')) return;
-        else {
-            let discard = $('.log-buttons .btn-reg h2');
-            direction = 'right';
-            if(selected.parents('.btn-reg').length) {
-                discard = $('.log-buttons .btn-log h2');
-                direction = 'left';
-            }
-            discard.removeClass('selected');
-            selected.addClass('selected');
-            $('.log-register-forms').animate({
-                'margin-left': direction === 'left' ? '-100%' : '0'
-            }, 400);
-        }
-    }
 });
+
+function checkIfLogin() {
+    if(window.location.href.includes('#login')) {
+        $('.log-buttons .btn-log h2').click();
+    } else {
+        $('.log-buttons .btn-reg h2').click();
+    }
+}
+
+function slideLog(selected) {
+    let direction;
+    if(!selected.hasClass('selected')) {
+        let discard = $('.log-buttons .btn-reg h2');
+        direction = 'right';
+        if(selected.parents('.btn-reg').length) {
+            discard = $('.log-buttons .btn-log h2');
+            direction = 'left';
+        }
+        discard.removeClass('selected');
+        selected.addClass('selected');
+        $('.log-register-forms').animate({
+            'margin-left': direction === 'left' ? '-100%' : '0'
+        }, 400);
+    }
+}
+
+export {submitter};

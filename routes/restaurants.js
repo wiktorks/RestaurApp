@@ -17,9 +17,9 @@ router.get('/:search', function (req, res) {
             db.query('SELECT Nazwa FROM kuchnia', function (err, kitchen) {
                 if (err) throw err;
                 if(req.isAuthenticated()) {
-                    res.render('restaurants', {restaurants: restaurants, kitchen: kitchen, logged: true, user: req.user})
+                    res.render('restaurants', {restaurants: restaurants, kitchen: kitchen, authenticated: true, user: req.user})
                 } else {
-                    res.render('restaurants', {restaurants: restaurants, kitchen: kitchen, logged: false});
+                    res.render('restaurants', {restaurants: restaurants, kitchen: kitchen, authenticated: false});
                 }
             });
         });

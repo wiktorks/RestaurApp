@@ -1,4 +1,52 @@
 @charset "UTF-8";
+#profile:hover, #profile ul li:hover {
+  color: black;
+  background-color: #fff; }
+
+#profile {
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  margin-right: 10%;
+  cursor: pointer;
+  min-width: 200px;
+  position: relative;
+  transition: color .4s, background-color .4s;
+  color: white; }
+  #profile div {
+    display: flex;
+    align-items: center; }
+  #profile span {
+    font-size: 1.5em; }
+    #profile span.profile-pic {
+      font-size: 2.5em; }
+  #profile p {
+    margin: 0 10px; }
+  #profile ul {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    left: 0;
+    max-height: 300px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    transition: max-height 0.6s;
+    overflow: hidden; }
+    #profile ul.hidden {
+      max-height: 0; }
+    #profile ul li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      transition: color .4s, background-color .4s; }
+
 body {
   margin: 0;
   background-color: #F8F5F2;
@@ -11,16 +59,16 @@ body {
   width: 100%;
   background-color: rgba(130, 130, 130, 0.5);
   z-index: 1; }
-  #top-nav ul {
+  #top-nav ul.top-list {
     display: flex;
     justify-content: space-between;
     align-items: center;
     list-style-type: none;
     padding: 0 50px; }
-    #top-nav ul li {
+    #top-nav ul.top-list li {
       display: flex;
       align-items: center; }
-      #top-nav ul li .icon {
+      #top-nav ul.top-list li .icon {
         display: inline-block;
         font-size: 30px;
         line-height: 40px;
@@ -31,19 +79,19 @@ body {
         vertical-align: bottom;
         border-radius: 50%;
         transition: background-color 0.4s; }
-        #top-nav ul li .icon:hover {
+        #top-nav ul.top-list li .icon:hover {
           background-color: rgba(0, 0, 0, 0.3); }
-      #top-nav ul li form {
+      #top-nav ul.top-list li form {
         margin-left: 100px;
         display: flex;
         align-items: center; }
-        #top-nav ul li form input[type="text"] {
+        #top-nav ul.top-list li form input[type="text"] {
           height: 30px;
           font-size: 1.1rem;
           padding: 2px;
           width: 300px;
           margin-right: 10px; }
-        #top-nav ul li form input[type="submit"] {
+        #top-nav ul.top-list li form input[type="submit"] {
           width: 70px;
           height: 30px;
           background-color: #d9534f;
@@ -52,11 +100,11 @@ body {
           transition: background-color, 0.4s;
           font-size: 15px;
           padding: 2px; }
-          #top-nav ul li form input[type="submit"]:hover {
+          #top-nav ul.top-list li form input[type="submit"]:hover {
             background-color: #a02622; }
-      #top-nav ul li:last-child .icon {
+      #top-nav ul.top-list li:last-child .icon {
         margin-right: 10px; }
-        #top-nav ul li:last-child .icon:last-child {
+        #top-nav ul.top-list li:last-child .icon:last-child {
           margin-right: 0; }
 
 #main-content {
@@ -607,11 +655,92 @@ body {
   position: absolute;
   top: 40px; }
 
+#popup-display {
+  width: 100px;
+  height: 50px;
+  background-color: #d9534f;
+  color: #fff;
+  border: none;
+  transition: background-color, 0.4s;
+  margin: 20px auto; }
+  #popup-display:hover {
+    background-color: #a02622; }
+
 .opinions {
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-top: 20px; }
+  .opinions .popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 3; }
+    .opinions .popup.hidden {
+      display: none; }
+    .opinions .popup .comment-field {
+      position: relative;
+      display: inline-block;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #d97376;
+      width: 500px;
+      height: 550px;
+      border-radius: 50px;
+      color: white; }
+      .opinions .popup .comment-field #comment-form {
+        width: 100%;
+        height: 100%;
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: 1.2em; }
+        .opinions .popup .comment-field #comment-form h1 {
+          font-size: 1.2em; }
+        .opinions .popup .comment-field #comment-form select {
+          width: 10%;
+          color: black;
+          font-size: 1.1em; }
+        .opinions .popup .comment-field #comment-form .text-wrapper {
+          margin: auto 0;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          width: 100%; }
+          .opinions .popup .comment-field #comment-form .text-wrapper textarea {
+            width: 80%;
+            padding: 10px;
+            border-radius: 30px;
+            font-size: 1.1em;
+            outline: none;
+            resize: none; }
+        .opinions .popup .comment-field #comment-form .buttons {
+          margin-top: auto;
+          margin-bottom: 30px; }
+          .opinions .popup .comment-field #comment-form .buttons button {
+            width: 100px;
+            height: 50px;
+            background-color: #d9534f;
+            color: #fff;
+            border: none;
+            transition: background-color, 0.4s; }
+            .opinions .popup .comment-field #comment-form .buttons button:hover {
+              background-color: #a02622; }
+          .opinions .popup .comment-field #comment-form .buttons input {
+            width: 100px;
+            height: 50px;
+            background-color: #d9534f;
+            color: #fff;
+            border: none;
+            transition: background-color, 0.4s; }
+            .opinions .popup .comment-field #comment-form .buttons input:hover {
+              background-color: #a02622; }
   .opinions .rate-bar {
     display: flex;
     margin: 0 50px;

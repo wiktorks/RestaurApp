@@ -1,5 +1,5 @@
 <div class="comment">
     <div class="arrow"></div>
     <div class="cover"></div>
-    <p class="message"><span style="font-weight: bold"><%= name %> napisał(a): </span><%= message %>
+    <p class="message"><span style="font-weight: bold"><%= new Date(date).toISOString().slice(0, 19).replace('T', ' ') %> przez <%= name %>: </span><%= message %>
 </div>

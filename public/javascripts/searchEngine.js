@@ -1,4 +1,4 @@
-var options = {
+const options = {
     input: '.js-typeahead',
     order: 'desc',
     limit: 10,
@@ -25,6 +25,6 @@ var options = {
             window.location.href = '/restaurants/' + searchString;
         }
     }
-}
+};
 
 export {options};

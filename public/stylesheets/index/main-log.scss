@@ -1,0 +1,88 @@
+@import '../user-menu';
+
+%common {
+  font-size: 4em;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 25px;
+}
+
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+  
+  nav {
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: flex-end;
+    color: white;
+    width: 100%;
+  }
+  
+  header {
+    height: 100vh;
+    background-image: url("/images/restauracja-start-2.jpeg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 550px;
+
+    h1 {
+      @extend %common;
+      margin-bottom: 0;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+
+      span {
+        color: red;
+        font-style: italic;
+        font-size: 1.5em;
+      }
+    }
+
+    h2 {
+      @extend %common;
+      margin-top: 0;
+      font-size: 3em;
+    }
+
+    p {
+      @extend %common;
+      margin-top: 50px;
+      font-size: 1.5em;
+      border-radius: 15px;
+    }
+
+    form {
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 10px;
+      width: 70%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      input {
+        border: 0;
+        /* height nadpisuje align-self!!! */
+        padding: 15px;
+        font-size: 1.5em;
+        flex-basis: 74%;
+        border-radius: 5px;
+        align-self: stretch;
+
+        &[type="submit"] {
+          padding: 0;
+          color: #fff;
+          background-color: #d9534f;
+          flex-basis: 20%;
+        }
+      }
+    }
+  }
+}

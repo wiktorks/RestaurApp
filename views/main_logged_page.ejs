@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RestaurApp</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/index/main-log.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+</head>
+
+<body>
+<nav>
+    <%- include('part_profile_menu', {userName: userName}) %>
+</nav>
+<header>
+    <h1>Restaur<span>App</span></h1>
+    <h2>Wyszukaj restaurację swoich marzeń!</h2>
+    <p>Wpisz miasto lub ulicę restauracji której szukasz</p>
+    <form class="search">
+        <input type="text" name="name" placeholder="Np. Długa, Kraków">
+        <input type="submit" value="Szukaj">
+    </form>
+</header>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="module" src="javascripts/index/loggedUser.js"></script>
+</body>
+</html>

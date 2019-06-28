@@ -24,8 +24,8 @@
 <nav>
     <ul>
         <li><a href="#">Home</a></li>
-        <li><a href="#login">Zaloguj</a></li>
-        <li><a href="#join">Dołącz do nas</a></li>
+        <li id="login"><a href="#login">Zaloguj</a></li>
+        <li id="join"><a href="#join">Dołącz do nas</a></li>
         <li><a href="#about">O nas</a></li>
         <li><a href="#contact">Kontakt</a></li>
     </ul>
@@ -41,29 +41,31 @@
             <h2 >Dołącz do nas</h2>
         </div>
     </div>
+    <%- messages('messages', locals) %>
     <div class="log-register-forms">
         <div class="container log-container">
             <form class="login" action="/login" method="post">
+                <label for="email"></label>
                 <input name="email" type="email" placeholder="Email" required>
                 <input name="passwd" type="password" placeholder="Hasło" required>
                 <input type="submit" value="Zaloguj">
             </form>
         </div>
         <div class="container reg-container">
-            <form class="register" action="">
+            <form class="register" action="/register" method="post">
                 <input type="text" name="name" placeholder="Imię">
                 <input type="text" name="surname" placeholder="Nazwisko">
                 <input type="email" name="email" placeholder="Email">
                 <input type="text" name="login" placeholder="Login">
-                <input type="text" name="password" placeholder="Hasło">
-                <input type="text" name="password" placeholder="Powtórz hasło">
+                <input type="password" name="password" placeholder="Hasło">
+                <input type="password" name="password-confirm" placeholder="Powtórz hasło">
                 <input type="submit" value="Zarejestruj">
             </form>
         </div>
     </div>
 </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="/javascripts/index/main.js"></script>
+<script type="module" src="/javascripts/index/main.js"></script>
 </body>
 
 </html>

@@ -12,6 +12,7 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 550px;
 }
 
 header h1,
@@ -77,8 +78,10 @@ nav {
     justify-content: space-around;
     align-items: center;
     height: 10vh;
+    min-height: 60px;
     position: sticky;
     top: 0;
+    z-index: 1;
 }
 nav ul {
     padding: 0;
@@ -117,6 +120,7 @@ a.anchor {
     background-color: #1ac6ff;
     position: relative;
     height: 90vh;
+    min-height: 550px;
     overflow: hidden;
 }
 
@@ -184,7 +188,7 @@ a.anchor {
     height: 500px;
     display: flex;
     align-items: center;
-    margin-left: 0%;
+    margin-left: 0;
 }
 
 #log-register .container {
@@ -240,3 +244,4 @@ a.anchor {
     background-color: #d9534f;
     margin-top: 20px;
 }
+

@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="/stylesheets/users/user-favourites.css">
+
+<%if(data !== null) { %>
+    <% for(item of data) {%>
+        <div class="restaurant">
+            <div class="image"></div>
+            <div class="rest-description">
+                <p><span>Nazwa: </span><%= item.Nazwa %></p>
+                <p><span>Miasto: </span><%= item.Miasto %></p>
+                <p><span>Adres: </span><%= item.Adres %> <%= item.Nr_Domu %></p>
+            </div>
+            <div class="ratings">
+                <p class="average"><span>Średnia ocen: </span><%= item.Srednia_Ocen %></p>
+                <p class="user"><span>Twoja ocena: </span><%= item.Nazwa %></p>
+            </div>
+            <button id="details">Szczegóły restauracji</button>
+            <button id="favourite">usuń z ulubionych</button>
+        </div>
+    <% } %>
+<% } else {%>
+<h1>Nie posiadasz żadnych ulubionych restauracji.</h1>
+<% } %>

@@ -6,6 +6,8 @@ var session = require('express-session');
 var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
 var passport = require('passport');
+var flash = require('connect-flash');
+var messages = require('express-messages');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -36,7 +38,12 @@ app.use(session({
     secret: 'sekretnysekret',
     resave: true,
     saveUninitialized: true
-}))
+}));
+app.use(flash());
+app.use(function (req, res, next) {
+    res.locals.messages = require('express-messages')(req, res);
+    next();
+});
 
 require('./lib/passport')(passport);
 app.use(passport.initialize());

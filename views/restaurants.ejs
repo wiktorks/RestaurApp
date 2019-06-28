@@ -10,13 +10,9 @@
 
 <body>
 <nav id="top-nav">
-    <ul>
+    <ul class="top-list">
         <li>
             <div id="nav-button" class="icon"><i class="fas fa-bars"></i></div>
-<!--            <form id="search-restaurants">-->
-<!--                <input type="text" name="typeahead">-->
-<!--                <input type="submit">-->
-<!--            </form>-->
             <form id="search-restaurants">
                 <div class="typeahead__container">
                     <div class="typeahead__field">
@@ -36,10 +32,8 @@
             </form>
         </li>
         <li>
-            <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-            <div class="icon"><i class="fas fa-sign-in-alt"></i></div>
-            <% if(logged) {%>
-                <a href="/logout"><%= user.login %></a>
+            <% if(authenticated) {%>
+                <%- include('part_profile_menu', {userName: user.login}) %>
             <% } %>
         </li>
     </ul>
@@ -104,7 +98,6 @@
         </div>
     </nav>
     <article class="restaurant-list">
-
         <% if(restaurants.length > 0) { %>
             <table class="restaurants">
                 <tr class="head">

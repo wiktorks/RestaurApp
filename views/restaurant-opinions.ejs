@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-<% include part_topNav.ejs %>
+<%- include('part_topNav', {authenticated: authenticated, userName: userName}) %>
 
 <section id="main-content">
     <nav class="side-nav" style="margin-left: <%= navSize %>%">
@@ -19,7 +19,7 @@
                 <% let i = 1 %>
                 <% for(category of food) { %>
                     <li class="container-elem">
-                        <a href="http://localhost:3000/restaurants/details/<%= restId %>/menu?nav=0#<%= i++; %>"><%= category.Kategoria %></a>
+                        <a href="/restaurants/details/<%= restId %>/menu?nav=0#<%= i++; %>"><%= category.Kategoria %></a>
                     </li>
                 <% } %>
             </ul>
@@ -41,13 +41,42 @@
                 <div class="bar"></div>
                 <p>Na podstawie <%= comments.length %> opinii</p>
             </div>
+            <%- messages('messages', locals) %>
+            <% if(authenticated) {%>
+                <button id="popup-display">Dodaj komentarz</button>
+                <div class="popup hidden">
+                    <div class="comment-field">
+                        <form action="/restaurants/details/<%= restId %>/opinions" method="post" id="comment-form">
+                            <h1>Dodaj komentarz</h1>
+                            <label for="rate">Ocena: </label>
+                            <select name="rate">
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+                            <div class="text-wrapper">
+                                <label for="comment">Komentarz:</label>
+                                <textarea name="comment" id="" cols="30" rows="10"></textarea>
+                            </div>
+                            <div class="buttons">
+                                <input type="submit" value="Prześlij">
+                                <button id="cancel">Anuluj</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            <% } else {%>
+                <p>Aby oceniać i dodawać komentarze musisz się zalogować.</p>
+            <% } %>
             <% for(comment of comments) { %>
             <div class="comment-container">
                 <figure class="profile">
                     <img src="/images/user.png" alt="Zdjęcie użytkownika">
                     <figcaption class="profile-rating"><%- include("part_ratings", {rate: comment.Ocena})%></figcaption>
                 </figure>
-                <%- include('part_comment', {name: comment.Login, message: comment.Komentarz}) %>
+                <%- include('part_comment', {name: comment.Login, message: comment.Komentarz, date: comment.Data_Dodania}) %>
             </div>
             <% } %>
         </section>

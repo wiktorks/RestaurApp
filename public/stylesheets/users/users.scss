@@ -1,0 +1,114 @@
+@import "../mixins";
+@import "../_variables.scss";
+@import "../../../node_modules/jquery-typeahead/src/jquery.typeahead.scss";
+
+body {
+  margin: 0;
+  background-color: $greyBgColor;
+  font-family: "Lato", sans-serif;
+  pointer-events: auto;
+}
+
+#top-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgba(130, 130, 130, 0.5);
+
+  ul:not(.typeahead__list) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+    padding: 0 50px;
+
+    li {
+      display: flex;
+      align-items: center;
+
+      .icon {
+        @include font-icon(30px, rgba(0, 0, 0, 0.3), #000);
+      }
+
+      form {
+        margin-left: 100px;
+        display: flex;
+        align-items: center;
+      }
+
+      &.profile-container {
+        margin-left: auto;
+
+        #profile {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .profile-pic {
+            font-size: 2em;
+          }
+          .profile-name {
+            margin: 0 20px 0 0;
+          }
+        }
+      }
+
+      &:last-child {
+        .icon {
+          margin-right: 10px;
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+article {
+  margin-top: 72px;
+  width: 100%;
+  height: calc(100% - 72px);
+
+  #inner-nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 20px 0;
+
+    div {
+      display: inline-block;
+      //flex-basis: 50%;
+      font-size: 1.4em;
+      padding: 0 10px;
+
+      a {
+        cursor: pointer;
+        &.selected {
+          color: $redColor;
+          border-bottom: 2px solid $redColor;
+        }
+        &:hover{
+          color: $redColor;
+        }
+      }
+      &#favourites {
+        a {
+          float: right;
+        }
+      }
+      &#settings {
+
+      }
+    }
+  }
+
+  #main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}

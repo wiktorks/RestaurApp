@@ -1,5 +1,6 @@
 import addRestaurants from './restaurantParser.js';
 import {options} from '../searchEngine.js';
+import userMenu from '../user-menu.js';
 
 const getWidth = (e) => {
     let counter = 1;
@@ -14,6 +15,7 @@ const getWidth = (e) => {
 
 $(function () {
     $.typeahead(options);
+    userMenu();
     $('#nav-button').click(() => {
         if($('.side-nav').css('margin-left') === '0px') {
             $('.side-nav').animate({

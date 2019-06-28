@@ -1,5 +1,6 @@
 @import "../mixins";
 @import "../variables";
+@import "../user-menu";
 @import "../../../node_modules/jquery-typeahead/src/jquery.typeahead.scss";
 
 body {
@@ -15,7 +16,7 @@ body {
   width: 100%;
   background-color: rgba(130, 130, 130, 0.5);
 
-  ul:not(.typeahead__list) {
+  ul.top-list:not(.typeahead__list) {
     display: flex;
     justify-content: space-between;
     align-items: center;

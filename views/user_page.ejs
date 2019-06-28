@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <%- include part_head.ejs %>
+    <link rel="stylesheet" href="/stylesheets/users/users.css">
+    <title>Konto</title>
+</head>
+<body>
+<%- include user_top_nav.ejs %>
+<article>
+    <nav id="inner-nav">
+        <div id="favourites" ><a class="selected">Ulubione</a></div>
+        <div id="settings"><a>Ustawienia konta</a></div>
+    </nav>
+    <section id="main">
+        <%- include(page, {data: data}) %>
+    </section>
+</article>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/scripts/jquery.typeahead.min.js"></script>
+<script type="module" src="/javascripts/users/main.js"></script>
+</body>
+</html>

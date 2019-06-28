@@ -1,3 +1,5 @@
+@import "../user-menu";
+
 body {
   margin: 0;
   background-color: $greyBgColor;
@@ -11,7 +13,7 @@ body {
   width: 100%;
   background-color: rgba(130, 130, 130, 0.5);
   z-index: 1;
-  ul {
+  ul.top-list {
     display: flex;
     justify-content: space-between;
     align-items: center;

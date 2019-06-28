@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-<% include part_topNav.ejs %>
+<%- include('part_topNav', {authenticated: authenticated, userName: userName}) %>
 
 <section id="main-content">
     <nav class="side-nav" style="margin-left: <%= navSize %>%">
@@ -17,7 +17,7 @@
             </div>
             <ul class="container-body">
                 <% let i = 1 %>
-                <% for(category in food) { %>
+                <% for(let category in food) { %>
                     <li class="container-elem">
                         <a href="#<%= i++; %>"><%= category %></a>
                     </li>
@@ -34,7 +34,7 @@
         </ul>
         <table class="restaurant-menu">
             <% i =1; %>
-            <% for(category in food) { %>
+            <% for(let category in food) { %>
             <tbody>
                 <tr class="category">
                     <th>

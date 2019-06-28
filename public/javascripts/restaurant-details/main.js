@@ -1,12 +1,33 @@
 import {options} from '../searchEngine.js';
+import userMenu from '/javascripts/user-menu.js';
 
 $(function(){
+    //console.log(document.forms['comment-form'].action);
     $.typeahead(options);
+    userMenu();
     $('#nav-button').click(navToggle);
     $('.nav-menu li:not(.back)').click(getDetails);
+    $('#popup-display').on('click', () => {
+        $('.popup').removeClass('hidden');
+    });
+    $('#cancel').on('click', (e) => {
+        e.preventDefault();
+        $('.popup').addClass('hidden');
+    });
+    $('#comment-form').on('submit', checkNav());
 });
 
+function checkNav() {
+    return function () {
+        let sideNav = $('.side-nav');
+        let marginSize = sideNav.css('margin-left') === '0px' ? '0' : '-25';
+        document.forms['comment-form'].action += '?nav=' + marginSize;
+        return true;
+    }
+}
+
 function navToggle() {
+    console.log('działa');
     if($('.side-nav').css('margin-left') === '0px') {
         $('.side-nav').animate({
             marginLeft: '-25%'
@@ -14,6 +35,8 @@ function navToggle() {
         $('.restaurant-details').animate({
             marginLeft: '0'
         }, 400);
+        $('.info').css('flex-basis', '50%');
+        $('#map').css('flex-basis', '50%');
     } else {
         $('.side-nav').animate({
             marginLeft: '0'
@@ -21,6 +44,8 @@ function navToggle() {
         $('.restaurant-details').animate({
             marginLeft: '25%'
         }, 400);
+        $('.info').css('flex-basis', '75%');
+        $('#map').css('flex-basis', '100%');
     }
 }
 
