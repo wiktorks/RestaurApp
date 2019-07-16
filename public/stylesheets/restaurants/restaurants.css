@@ -1,4 +1,7 @@
 @charset "UTF-8";
+#top-nav p {
+  margin: 0; }
+
 #profile:hover, #profile ul li:hover {
   color: black;
   background-color: #fff; }

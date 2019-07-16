@@ -22,6 +22,15 @@
                         <a href="/restaurants/details/<%= restId %>/menu?nav=0#<%= i++; %>"><%= category.Kategoria %></a>
                     </li>
                 <% } %>
+                <% if(authenticated) {%>
+                    <li>
+                        <%if(isFavourite) {%>
+                        <button class="favourite-button in-favourites">Usuń z ulubionych</button>
+                        <% } else {%>
+                        <button class="favourite-button">Dodaj do ulubionych</button>
+                        <% } %>
+                    </li>
+                <% } %>
             </ul>
         </div>
     </nav>

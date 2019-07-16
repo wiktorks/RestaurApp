@@ -1,0 +1,29 @@
+@import "../mixins";
+@import "../_variables.scss";
+
+#settings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  .field {
+    input {
+      border: 1px solid darkred;
+      /* height nadpisuje align-self!!! */
+      padding: 15px;
+      font-size: 1.1em;
+      //flex-basis: 74%;
+      border-radius: 5px;
+      align-self: stretch;
+      margin-bottom: 10px;
+    }
+    button {
+      @include button(50px, 30px, $lightRedColor);
+    }
+  }
+  #delete {
+    @include button(100px, 40px, $lightRedColor);
+    font-size: 1.05em;
+  }
+}

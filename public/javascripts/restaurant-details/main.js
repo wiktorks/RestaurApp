@@ -15,6 +15,17 @@ $(function(){
         $('.popup').addClass('hidden');
     });
     $('#comment-form').on('submit', checkNav());
+    $('.favourite-button').on('click', function (e) {
+        let url = window.location.href.replace(/(.*)\/[a-z]+$/, '$1/favourite' );
+        fetch(url).then(response => {return response.json()})
+            .then(data => {
+                alert(data.message);
+                $(this).toggleClass('in-favourites');
+                $(this).text(function (i, text) {
+                    return text === 'Usuń z ulubionych' ? 'Dodaj do ulubionych' : 'Usuń z ulubionych';
+                });
+            });
+    });
 });
 
 function checkNav() {

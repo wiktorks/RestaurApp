@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 09 Maj 2019, 10:54
+-- Czas generowania: 16 Lip 2019, 11:51
 -- Wersja serwera: 10.1.38-MariaDB
 -- Wersja PHP: 7.3.3
 
@@ -70,7 +70,7 @@ INSERT INTO `danie` (`Id_Danie`, `Nazwa`, `Cena`, `Opis`, `Skladniki`, `Zdjecie`
 (4, 'Żurek', '7.00', 'żurek', 'kiełbasa, sznurek', 90909, 'Zupy', 5),
 (5, 'Kurczak po Wietnamsku', '19.60', 'Kurczak', 'po wietnamsku', 11111, 'główne danie', 6),
 (6, 'Margherita', '15.70', 'pizza', 'margheria', 11112, 'główne danie', 7),
-(7, 'Rosół', '50.00', 'droooogi', 'cośtam', 323232, 'zupy', 5);
+(7, 'Rosół', '50.00', 'droooogi', 'cośtam', 323232, 'Zupy', 5);
 
 --
 -- Wyzwalacze `danie`
@@ -134,22 +134,22 @@ CREATE TABLE `klient` (
   `Haslo` varchar(45) CHARACTER SET utf16 COLLATE utf16_bin NOT NULL,
   `Email` varchar(45) CHARACTER SET utf16 COLLATE utf16_bin NOT NULL,
   `Imie` varchar(45) CHARACTER SET utf16 COLLATE utf16_polish_ci DEFAULT NULL,
-  `Nazwisko` varchar(45) CHARACTER SET utf16 COLLATE utf16_polish_ci DEFAULT NULL,
-  `Zdjecie` int(11) DEFAULT NULL
+  `Nazwisko` varchar(45) CHARACTER SET utf16 COLLATE utf16_polish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `klient`
 --
 
-INSERT INTO `klient` (`Id_Klient`, `Login`, `Haslo`, `Email`, `Imie`, `Nazwisko`, `Zdjecie`) VALUES
-(6, 'anton', 'admin', 'asdf@fdsa.pl', 'Antoni', 'Kowalski', 3334),
-(7, 'aNowak', 'rewrwr', 'qqq@aaa.pl', 'Adrian', 'shepard', 323222),
-(8, 'linx', 'wwwww', 'linx@gmail.com', 'adam', 'mada', 666),
-(9, 'ng', 'adda', 'ng@wp.pl', 'adrian', 'nowak', 11101),
-(10, 'adsf', 'fdsa', 'asdf@o2.pl', 'Wociecj', 'aaa', 678),
-(11, 'wiktorks', 'asdfg', 'wik@mail.com', NULL, NULL, NULL),
-(12, 'benek', 'qwerty', 'benek@yo.pl', NULL, NULL, NULL);
+INSERT INTO `klient` (`Id_Klient`, `Login`, `Haslo`, `Email`, `Imie`, `Nazwisko`) VALUES
+(6, 'anton', 'admin', 'asdf@fdsa.pl', 'Antoni', 'Kowalski'),
+(7, 'aNowak', 'rewrwr', 'qqq@aaa.pl', 'Adrian', 'shepard'),
+(8, 'linx', 'wwwww', 'linx@gmail.com', 'adam', 'mada'),
+(9, 'ng', 'adda', 'ng@wp.pl', 'adrian', 'nowak'),
+(10, 'adsf', 'fdsa', 'asdf@o2.pl', 'Wociecj', 'aaa'),
+(11, 'wiktorks', 'asdfg', 'wik@mail.com', NULL, NULL),
+(12, 'benek', 'qwerty', 'benek@yo.pl', NULL, NULL),
+(13, 'ratatuj', 'asd', 'a@b.c', 'Wiktor', 'Kosterski');
 
 -- --------------------------------------------------------
 
@@ -161,19 +161,22 @@ CREATE TABLE `klient_restauracja` (
   `Komentarz` varchar(500) CHARACTER SET utf16 COLLATE utf16_polish_ci DEFAULT NULL,
   `Ocena` tinyint(1) UNSIGNED ZEROFILL NOT NULL,
   `fk_Klient` int(10) UNSIGNED NOT NULL,
-  `fk_Restauracja1` int(10) UNSIGNED NOT NULL
+  `fk_Restauracja1` int(10) UNSIGNED NOT NULL,
+  `Data_Dodania` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `klient_restauracja`
 --
 
-INSERT INTO `klient_restauracja` (`Komentarz`, `Ocena`, `fk_Klient`, `fk_Restauracja1`) VALUES
-('Bardzo fajna knajpa :)', 5, 6, 5),
-(NULL, 2, 8, 5),
-(NULL, 3, 8, 6),
-(NULL, 4, 9, 5),
-(NULL, 4, 10, 6);
+INSERT INTO `klient_restauracja` (`Komentarz`, `Ocena`, `fk_Klient`, `fk_Restauracja1`, `Data_Dodania`) VALUES
+('Bardzo fajna knajpa :)', 5, 6, 5, 0),
+(NULL, 2, 8, 5, 0),
+(NULL, 3, 8, 6, 0),
+(NULL, 4, 9, 5, 0),
+(NULL, 4, 10, 6, 0),
+('asdf', 4, 12, 5, 1561447979069),
+('erere', 5, 12, 6, 1561414728064);
 
 --
 -- Wyzwalacze `klient_restauracja`
@@ -194,6 +197,26 @@ CREATE TRIGGER `srednia` AFTER INSERT ON `klient_restauracja` FOR EACH ROW BEGIN
 END
 $$
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `klient_ulubione`
+--
+
+CREATE TABLE `klient_ulubione` (
+  `fk_Klient` int(10) UNSIGNED NOT NULL,
+  `fk_Restauracja` int(10) UNSIGNED NOT NULL,
+  `Dodano` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Zrzut danych tabeli `klient_ulubione`
+--
+
+INSERT INTO `klient_ulubione` (`fk_Klient`, `fk_Restauracja`, `Dodano`) VALUES
+(7, 5, '0000-00-00'),
+(12, 5, '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -237,18 +260,21 @@ CREATE TABLE `restauracja` (
   `Zdjecie` int(11) DEFAULT NULL,
   `fk_Kuchnia` int(10) UNSIGNED NOT NULL,
   `fk_Wlasciciel` int(10) UNSIGNED NOT NULL,
-  `Srednia_Cen` enum('cheap','average','expensive') NOT NULL
+  `Srednia_Cen` enum('cheap','average','expensive') NOT NULL,
+  `Miasto` varchar(30) NOT NULL,
+  `Numer` varchar(20) NOT NULL,
+  `Nr_Domu` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `restauracja`
 --
 
-INSERT INTO `restauracja` (`Id_Restaruacja`, `Nazwa`, `Opis`, `Adres`, `Tagi`, `Koszt_Dostawy`, `Min_Kwota_Zamowienia`, `Czas_Oczekiwania`, `Srednia_Ocen`, `Zdjecie`, `fk_Kuchnia`, `fk_Wlasciciel`, `Srednia_Cen`) VALUES
-(5, 'Chłopskie Jadło', 'Nowa restauracja niedaleko centrum. Otwarta codziennie między 10.00 a 21.00. Także dowozimy.', 'Długa', 'polska, smaczna, zdrowa', '5.50', '20.00', 60, 3.66667, 3334, 9, 1, 'average'),
-(6, 'Wong Dong', 'Chińska knajpa otwarta codziennie między 9.00 a 22.00. Możliwość dostawy.', 'Długa', 'chińska, tania, duzo', '4.00', '30.00', 80, 3.5, 323222, 1, 2, 'cheap'),
-(7, 'Ristorante', 'Tradycyjna włoska pizza wyrabiana w tradycyjnym włoskim piecu.', 'Długa', 'Włoska, pizza', NULL, '15.00', 50, 0, 13131, 2, 2, 'cheap'),
-(8, 'Rest', 'asdasdasd', 'Krótka', 'aaa', '12.00', '11.00', 100, 3.4, 1212, 9, 1, 'cheap');
+INSERT INTO `restauracja` (`Id_Restaruacja`, `Nazwa`, `Opis`, `Adres`, `Tagi`, `Koszt_Dostawy`, `Min_Kwota_Zamowienia`, `Czas_Oczekiwania`, `Srednia_Ocen`, `Zdjecie`, `fk_Kuchnia`, `fk_Wlasciciel`, `Srednia_Cen`, `Miasto`, `Numer`, `Nr_Domu`) VALUES
+(5, 'Chłopskie Jadło', 'Nowa restauracja niedaleko centrum. Otwarta codziennie między 10.00 a 21.00. Także dowozimy.', 'Długa', 'polska, smaczna, zdrowa', '5.50', '20.00', 60, 3.75, 3334, 9, 1, 'average', 'Warszawa', '123-456-789', 8),
+(6, 'Wong Dong', 'Chińska knajpa otwarta codziennie między 9.00 a 22.00. Możliwość dostawy.', 'Długa', 'chińska, tania, duzo', '4.00', '30.00', 80, 4, 323222, 1, 2, 'cheap', 'Kraków', '413-324-567', 16),
+(7, 'Ristorante', 'Tradycyjna włoska pizza wyrabiana w tradycyjnym włoskim piecu.', 'Długa', 'Włoska, pizza', NULL, '15.00', 50, 0, 13131, 2, 2, 'cheap', 'Kraków', '420-666-137', 4),
+(8, 'Rest', 'asdasdasd', 'Krótka', 'aaa', '12.00', '11.00', 100, 3.4, 1212, 9, 1, 'cheap', 'Kraków', '987-654-321', 10);
 
 -- --------------------------------------------------------
 
@@ -316,6 +342,13 @@ ALTER TABLE `klient_restauracja`
   ADD KEY `fk_Restauracja1_idx` (`fk_Restauracja1`);
 
 --
+-- Indeksy dla tabeli `klient_ulubione`
+--
+ALTER TABLE `klient_ulubione`
+  ADD PRIMARY KEY (`fk_Klient`,`fk_Restauracja`),
+  ADD KEY `fk_restauracje` (`fk_Restauracja`);
+
+--
 -- Indeksy dla tabeli `kuchnia`
 --
 ALTER TABLE `kuchnia`
@@ -359,7 +392,7 @@ ALTER TABLE `danie`
 -- AUTO_INCREMENT dla tabeli `klient`
 --
 ALTER TABLE `klient`
-  MODIFY `Id_Klient` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `Id_Klient` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT dla tabeli `kuchnia`
@@ -402,6 +435,13 @@ ALTER TABLE `danie_alergen`
 ALTER TABLE `klient_restauracja`
   ADD CONSTRAINT `fk_Klient` FOREIGN KEY (`fk_Klient`) REFERENCES `klient` (`Id_Klient`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_Restauracja1` FOREIGN KEY (`fk_Restauracja1`) REFERENCES `restauracja` (`Id_Restaruacja`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ograniczenia dla tabeli `klient_ulubione`
+--
+ALTER TABLE `klient_ulubione`
+  ADD CONSTRAINT `fk_klienci` FOREIGN KEY (`fk_Klient`) REFERENCES `klient` (`Id_Klient`),
+  ADD CONSTRAINT `fk_restauracje` FOREIGN KEY (`fk_Restauracja`) REFERENCES `restauracja` (`Id_Restaruacja`);
 
 --
 -- Ograniczenia dla tabeli `restauracja`

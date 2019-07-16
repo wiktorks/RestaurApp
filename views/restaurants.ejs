@@ -34,6 +34,8 @@
         <li>
             <% if(authenticated) {%>
                 <%- include('part_profile_menu', {userName: user.login}) %>
+            <% } else {%>
+                <p>Zaloguj</p>
             <% } %>
         </li>
     </ul>

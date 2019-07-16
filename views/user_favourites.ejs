@@ -2,7 +2,7 @@
 
 <%if(data !== null) { %>
     <% for(item of data) {%>
-        <div class="restaurant">
+        <div class="restaurant" id="<%= item.Id_Restaruacja%>">
             <div class="image"></div>
             <div class="rest-description">
                 <p><span>Nazwa: </span><%= item.Nazwa %></p>
@@ -11,10 +11,10 @@
             </div>
             <div class="ratings">
                 <p class="average"><span>Średnia ocen: </span><%= item.Srednia_Ocen %></p>
-                <p class="user"><span>Twoja ocena: </span><%= item.Nazwa %></p>
+                <p class="user"><span>Twoja ocena: </span><%= item.Ocena %></p>
             </div>
-            <button id="details">Szczegóły restauracji</button>
-            <button id="favourite">usuń z ulubionych</button>
+            <button class="details">Szczegóły restauracji</button>
+            <button class="favourite">usuń z ulubionych</button>
         </div>
     <% } %>
 <% } else {%>

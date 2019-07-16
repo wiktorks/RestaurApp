@@ -1,4 +1,6 @@
 @import "../user-menu";
+@import "../_mixins";
+@import "../variables";
 
 body {
   margin: 0;
@@ -81,6 +83,23 @@ body {
     left: 0;
     padding-top: 50px;
     margin-left: 0;
+
+    .favourite-button {
+      @include button(150px, 50px, white);
+      color: black;
+      border: 1px solid #434343;
+      font-size: 1.2em;
+      margin-top: 50px;
+
+      &.in-favourites {
+        background-color: $lightRedColor;
+        color: white;
+        transition: background-color, 0.4s;
+        &:hover {
+          background-color: darken($lightRedColor, 20%);
+        }
+      }
+    }
 
     .nav-container {
       width: 60%;

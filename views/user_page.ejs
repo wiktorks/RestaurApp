@@ -6,11 +6,11 @@
     <title>Konto</title>
 </head>
 <body>
-<%- include user_top_nav.ejs %>
+<%- include("user_top_nav", {user: user}) %>
 <article>
     <nav id="inner-nav">
-        <div id="favourites" ><a class="selected">Ulubione</a></div>
-        <div id="settings"><a>Ustawienia konta</a></div>
+        <div id="favourites" ><a href="#" <%if(page === 'user_favourites') {%>class="selected"<% } %>>Ulubione</a></div>
+        <div id="settings"><a href="#" <%if(page === 'user_settings') {%>class="selected"<% } %>>Ustawienia konta</a></div>
     </nav>
     <section id="main">
         <%- include(page, {data: data}) %>

@@ -28,6 +28,10 @@ body {
 
       .icon {
         @include font-icon(30px, rgba(0, 0, 0, 0.3), #000);
+
+        a {
+          color: black;
+        }
       }
 
       form {
@@ -86,6 +90,7 @@ article {
 
       a {
         cursor: pointer;
+        text-decoration: none;
         &.selected {
           color: $redColor;
           border-bottom: 2px solid $redColor;

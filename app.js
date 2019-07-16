@@ -8,6 +8,7 @@ var sassMiddleware = require('node-sass-middleware');
 var passport = require('passport');
 var flash = require('connect-flash');
 var messages = require('express-messages');
+var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -33,6 +34,9 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/scripts', express.static(__dirname + '/node_modules/jquery-typeahead/dist'));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use(session({
     secret: 'sekretnysekret',

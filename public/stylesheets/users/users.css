@@ -1,3 +1,6 @@
+#top-nav p {
+  margin: 0; }
+
 .typeahead__container {
   /**
      * Restore the font weight unset by the previous rule.
@@ -489,6 +492,8 @@ body {
         transition: background-color 0.4s; }
         #top-nav ul:not(.typeahead__list) li .icon:hover {
           background-color: rgba(0, 0, 0, 0.3); }
+        #top-nav ul:not(.typeahead__list) li .icon a {
+          color: black; }
       #top-nav ul:not(.typeahead__list) li form {
         margin-left: 100px;
         display: flex;
@@ -523,7 +528,8 @@ article {
       font-size: 1.4em;
       padding: 0 10px; }
       article #inner-nav div a {
-        cursor: pointer; }
+        cursor: pointer;
+        text-decoration: none; }
         article #inner-nav div a.selected {
           color: #d9534f;
           border-bottom: 2px solid #d9534f; }

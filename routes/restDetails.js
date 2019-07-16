@@ -24,12 +24,18 @@ router.get('/:restId/menu', function(req, res) {
                     userName: null
                 });
             } else {
-                res.render('restaurant-menu', {
-                    food: food,
-                    navSize: req.query.nav,
-                    address: restInfo.adres,
-                    authenticated: authenticated,
-                    userName: req.user.login
+                db.query("SELECT * FROM klient_ulubione WHERE fk_Klient = ? AND fk_Restauracja = ?",[req.user.klientId, req.params.restId], function (err, data) {
+                    let isFavourite = true;
+                    if(data.length === 0) isFavourite = false;
+
+                    res.render('restaurant-menu', {
+                        food: food,
+                        navSize: req.query.nav,
+                        address: restInfo.adres,
+                        authenticated: authenticated,
+                        userName: req.user.login,
+                        isFavourite: isFavourite
+                    });
                 });
             }
         });
@@ -43,28 +49,36 @@ router.get('/:restId/opinions', function(req, res) {
         if (err) throw err;
         db.query(sqlComments, [req.params.restId], function(err, comments) {
             if (err) throw err;
-            let authenticated = true;
-            if(!req.isAuthenticated()) {
-                authenticated = false;
-                res.render('restaurant-opinions.ejs', {
-                    food: food,
-                    comments: comments,
-                    navSize: req.query.nav,
-                    restId: req.params.restId,
-                    authenticated: authenticated,
-                    userName: null
-                });
-            } else {
-                res.render('restaurant-opinions.ejs', {
-                    food: food,
-                    comments: comments,
-                    navSize: req.query.nav,
-                    restId: req.params.restId,
-                    authenticated: authenticated,
-                    userName: req.user.login
-                });
-            }
+            db.query('SELECT Adres, Nazwa FROM restauracja WHERE Id_Restaruacja = ?', [req.params.restId], function (err, address) {
+                console.log(comments);
+                if(!req.isAuthenticated()) {
+                    res.render('restaurant-opinions.ejs', {
+                        food: food,
+                        restInfo: address[0],
+                        comments: comments.length > 0 ? comments : false,
+                        navSize: req.query.nav,
+                        restId: req.params.restId,
+                        authenticated: false,
+                        userName: null
+                    });
+                } else {
+                    db.query("SELECT * FROM klient_ulubione WHERE fk_Klient = ? AND fk_Restauracja = ?",[req.user.klientId, req.params.restId], function (err, data) {
+                        let isFavourite = true;
+                        if(data.length === 0) isFavourite = false;
 
+                        res.render('restaurant-opinions', {
+                            food: food,
+                            restInfo: address[0],
+                            comments: comments.length > 0 ? comments : false,
+                            navSize: req.query.nav,
+                            restId: req.params.restId,
+                            authenticated: true,
+                            userName: req.user.login,
+                            isFavourite: isFavourite
+                        });
+                    });
+                }
+            });
         });
     });
 });
@@ -107,18 +121,45 @@ router.get('/:restId/information', function(req, res) {
                     authenticated: authenticated
                 });
             } else {
-                res.render('restaurant-info', {
-                    food: food,
-                    navSize: req.query.nav,
-                    restInfo: restInfo,
-                    restId: req.params.restId,
-                    userName: req.user.login,
-                    authenticated: authenticated
+                db.query("SELECT * FROM klient_ulubione WHERE fk_Klient = ? AND fk_Restauracja = ?",[req.user.klientId, req.params.restId], function (err, data) {
+                    let isFavourite = true;
+                    if(data.length === 0) isFavourite = false;
+
+                    res.render('restaurant-info', {
+                        food: food,
+                        navSize: req.query.nav,
+                        restInfo: restInfo,
+                        restId: req.params.restId,
+                        authenticated: authenticated,
+                        userName: req.user.login,
+                        isFavourite: isFavourite
+                    });
                 });
             }
-
         });
     }).catch(err => {throw err})
+});
+
+router.get('/:restId/favourite', function (req, res) {
+    if(req.isAuthenticated()) {
+        db.query("SELECT * FROM klient_ulubione WHERE fk_Klient = ? AND fk_Restauracja = ?",[req.user.klientId, req.params.restId], function (err, data) {
+            if(err) throw err;
+            console.log(req.user.klientId + ' -> ' +  req.params.restId)
+            if(data.length > 0) {
+                db.query('DELETE FROM klient_ulubione WHERE fk_Klient = ? AND fk_Restauracja = ?', [req.user.klientId, req.params.restId], function (err, dat) {
+                    if(err) throw err;
+                    res.json({message: 'Pomyślnie usunięto restaurację z ulubionych'});
+                });
+            } else {
+                db.query("INSERT INTO klient_ulubione VALUES (?, ?, 0)", [req.user.klientId, req.params.restId], function (err, dat) {
+                    if(err) throw err;
+                    res.json({message: 'Pomyślnie dodano restaurację do ulubionych'});
+                });
+            }
+        });
+    } else {
+        req.flash('error', 'Aby dodawać do ulubionych, musisz się zalogować.');
+    }
 });
 
 function categorizeFood(data) {

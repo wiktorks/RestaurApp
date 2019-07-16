@@ -1,4 +1,7 @@
 @charset "UTF-8";
+#top-nav p {
+  margin: 0; }
+
 #profile:hover, #profile ul li:hover {
   color: black;
   background-color: #fff; }
@@ -46,6 +49,9 @@
       justify-content: space-between;
       padding: 10px 20px;
       transition: color .4s, background-color .4s; }
+
+#top-nav p {
+  margin: 0; }
 
 body {
   margin: 0;
@@ -123,6 +129,25 @@ body {
     left: 0;
     padding-top: 50px;
     margin-left: 0; }
+    #main-content .side-nav .favourite-button {
+      width: 150px;
+      height: 50px;
+      background-color: white;
+      color: #fff;
+      border: none;
+      transition: background-color, 0.4s;
+      color: black;
+      border: 1px solid #434343;
+      font-size: 1.2em;
+      margin-top: 50px; }
+      #main-content .side-nav .favourite-button:hover {
+        background-color: #cccccc; }
+      #main-content .side-nav .favourite-button.in-favourites {
+        background-color: #d97376;
+        color: white;
+        transition: background-color, 0.4s; }
+        #main-content .side-nav .favourite-button.in-favourites:hover {
+          background-color: #b53135; }
     #main-content .side-nav .nav-container {
       width: 60%;
       margin-bottom: 50px; }

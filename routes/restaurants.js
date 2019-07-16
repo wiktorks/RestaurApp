@@ -1,10 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
+/*if(req.isAuthenticated()) {
+        sql = 'SELECT Id_Restaruacja, Nazwa, Srednia_Ocen, Srednia_Cen, fk_Klient FROM restauracja LEFT JOIN klient_ulubione ON Id_Restaruacja = fk_Restauracja AND fk_Klient = 7 AND Adres LIKE ?';
+    }*/
+
 const db = require('../lib/dbconfig/dbconnection');
 
 router.get('/:search', function (req, res) {
-    //let searchWords = req.params.search.split('-');
     let sql = 'SELECT Id_Restaruacja, Nazwa, Srednia_Ocen, Srednia_Cen FROM restauracja WHERE Adres LIKE ?';
     if(Object.entries(req.query).length === 0 && req.query.constructor === Object) { // Czy nie ma parametrów filtrowania
         let params = req.params.search.split('-').filter((el) => {
@@ -17,7 +20,7 @@ router.get('/:search', function (req, res) {
             db.query('SELECT Nazwa FROM kuchnia', function (err, kitchen) {
                 if (err) throw err;
                 if(req.isAuthenticated()) {
-                    res.render('restaurants', {restaurants: restaurants, kitchen: kitchen, authenticated: true, user: req.user})
+                    res.render('restaurants', {restaurants: restaurants, kitchen: kitchen, authenticated: true, user: req.user});
                 } else {
                     res.render('restaurants', {restaurants: restaurants, kitchen: kitchen, authenticated: false});
                 }
@@ -52,12 +55,13 @@ router.post('/:search/suggestion', function (req, res) {
         return el !== '';
     });
     let json = [];
-    db.query("SELECT DISTINCT Adres, Miasto FROM `restauracja` WHERE Adres LIKE ?", [params[0] + '%'], function (err, data) {
+    db.query("SELECT DISTINCT Adres, Miasto FROM `restauracja` WHERE Adres LIKE ?",
+        [params[0] + '%'],
+        function (err, data) {
         if(err) throw err;
         for(let pair of data) {
             json.push({"street": pair.Adres, "city": pair.Miasto});
         }
-        console.log(json);
         res.send(json);
     });
 });

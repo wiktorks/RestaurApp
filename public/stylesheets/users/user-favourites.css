@@ -3,7 +3,8 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  background-color: #fff; }
+  background-color: #fff;
+  margin-bottom: 5px; }
   .restaurant div {
     flex-basis: 25%; }
   .restaurant .image {
